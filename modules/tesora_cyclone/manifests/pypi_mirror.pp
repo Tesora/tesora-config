@@ -56,6 +56,10 @@ class tesora_cyclone::pypi_mirror (
     ensure => directory,
   }
 
+  file { '/var/run/bandersnatch':
+    ensure => directory,
+  }
+
   cron { 'bandersnatch':
     minute      => $cron_frequency,
     command     => 'flock -n /var/run/bandersnatch/mirror.lock timeout -k 2m 30m run-bandersnatch >>/var/log/bandersnatch/mirror.log 2>&1',
