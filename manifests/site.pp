@@ -6,42 +6,18 @@
 # passed around in test.sh
 #
 $elasticsearch_nodes = [
-  'elasticsearch02.openstack.org',
-  'elasticsearch03.openstack.org',
-  'elasticsearch04.openstack.org',
-  'elasticsearch05.openstack.org',
-  'elasticsearch06.openstack.org',
-  'elasticsearch07.openstack.org',
+  'elasticsearch02.elasticdb.org',
 ]
 $elasticsearch_clients = [
-  'logstash.openstack.org',
-  'logstash-worker01.openstack.org',
-  'logstash-worker02.openstack.org',
-  'logstash-worker03.openstack.org',
-  'logstash-worker04.openstack.org',
-  'logstash-worker05.openstack.org',
-  'logstash-worker06.openstack.org',
-  'logstash-worker07.openstack.org',
-  'logstash-worker08.openstack.org',
-  'logstash-worker09.openstack.org',
-  'logstash-worker10.openstack.org',
-  'logstash-worker11.openstack.org',
-  'logstash-worker12.openstack.org',
-  'logstash-worker13.openstack.org',
-  'logstash-worker14.openstack.org',
-  'logstash-worker15.openstack.org',
-  'logstash-worker16.openstack.org',
-  'logstash-worker17.openstack.org',
-  'logstash-worker18.openstack.org',
-  'logstash-worker19.openstack.org',
-  'logstash-worker20.openstack.org',
+  'logstash.elasticdb.org',
+  'logstash-worker01.elasticdb.org',
 ]
 
 #
 # Default: should at least behave like an openstack server
 #
 node default {
-  class { 'openstack_project::server':
+  class { 'tesora_cyclone::server':
     sysadmins => hiera('sysadmins', []),
   }
 }
@@ -50,9 +26,9 @@ node default {
 # Long lived servers:
 #
 # Node-OS: precise
-node 'review.openstack.org' {
-  class { 'openstack_project::review':
-    project_config_repo                 => 'https://git.openstack.org/openstack-infra/project-config',
+node 'review.elasticdb.org' {
+  class { 'tesora_cyclone::review':
+    project_config_repo                 => 'https://git.elasticdb.org/openstack-infra/project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
@@ -87,9 +63,9 @@ node 'review.openstack.org' {
 }
 
 # Node-OS: precise
-node 'review-dev.openstack.org' {
-  class { 'openstack_project::review_dev':
-    project_config_repo             => 'https://git.openstack.org/openstack-infra/project-config',
+node 'review-dev.elasticdb.org' {
+  class { 'tesora_cyclone::review_dev':
+    project_config_repo             => 'https://git.elasticdb.org/openstack-infra/project-config',
     github_oauth_token              => hiera('gerrit_dev_github_token', 'XXX'),
     github_project_username         => hiera('github_dev_project_username', 'username'),
     github_project_password         => hiera('github_dev_project_password', 'XXX'),
@@ -112,39 +88,39 @@ node 'review-dev.openstack.org' {
 }
 
 # Node-OS: precise
-node 'jenkins.openstack.org' {
-  class { 'openstack_project::jenkins':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+node 'jenkins.elasticdb.org' {
+  class { 'tesora_cyclone::jenkins':
+    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('jenkins_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('jenkins_ssl_chain_file_contents', 'XXX'),
     sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
+    zmq_event_receivers     => ['logstash.elasticdb.org',
+                                'nodepool.elasticdb.org',
     ],
   }
 }
 
 # Node-OS: precise
 node /^jenkins\d+\.openstack\.org$/ {
-  class { 'openstack_project::jenkins':
+  class { 'tesora_cyclone::jenkins':
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
     sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
+    zmq_event_receivers     => ['logstash.elasticdb.org',
+                                'nodepool.elasticdb.org',
     ],
   }
 }
 
 # Node-OS: precise
-node 'jenkins-dev.openstack.org' {
-  class { 'openstack_project::jenkins_dev':
+node 'jenkins-dev.elasticdb.org' {
+  class { 'tesora_cyclone::jenkins_dev':
     jenkins_ssh_private_key  => hiera('jenkins_dev_ssh_private_key_contents', 'XXX'),
     sysadmins                => hiera('sysadmins', []),
     mysql_password           => hiera('nodepool_dev_mysql_password', 'XXX'),
@@ -160,23 +136,23 @@ node 'jenkins-dev.openstack.org' {
 }
 
 # Node-OS: precise
-node 'cacti.openstack.org' {
-  include openstack_project::ssl_cert_check
-  class { 'openstack_project::cacti':
+node 'cacti.elasticdb.org' {
+  include tesora_cyclone::ssl_cert_check
+  class { 'tesora_cyclone::cacti':
     sysadmins => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
-node 'community.openstack.org' {
-  class { 'openstack_project::community':
+node 'community.elasticdb.org' {
+  class { 'tesora_cyclone::community':
     sysadmins => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
-node 'puppetmaster.openstack.org' {
-  class { 'openstack_project::puppetmaster':
+node 'puppetmaster.elasticdb.org' {
+  class { 'tesora_cyclone::puppetmaster':
     root_rsa_key => hiera('puppetmaster_root_rsa_key', 'XXX'),
     sysadmins    => hiera('sysadmins', []),
     version      => '3.6.',
@@ -184,28 +160,28 @@ node 'puppetmaster.openstack.org' {
 }
 
 # Node-OS: precise
-node 'puppetdb.openstack.org' {
-  class { 'openstack_project::puppetdb':
+node 'puppetdb.elasticdb.org' {
+  class { 'tesora_cyclone::puppetdb':
     sysadmins => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
-node 'graphite.openstack.org' {
-  class { 'openstack_project::graphite':
+node 'graphite.elasticdb.org' {
+  class { 'tesora_cyclone::graphite':
     sysadmins               => hiera('sysadmins', []),
     graphite_admin_user     => hiera('graphite_admin_user', 'username'),
     graphite_admin_email    => hiera('graphite_admin_email', 'email@example.com'),
     graphite_admin_password => hiera('graphite_admin_password', 'XXX'),
-    statsd_hosts            => ['logstash.openstack.org',
-                                'nodepool.openstack.org',
-                                'zuul.openstack.org'],
+    statsd_hosts            => ['logstash.elasticdb.org',
+                                'nodepool.elasticdb.org',
+                                'zuul.elasticdb.org'],
   }
 }
 
 # Node-OS: precise
-node 'groups.openstack.org' {
-  class { 'openstack_project::groups':
+node 'groups.elasticdb.org' {
+  class { 'tesora_cyclone::groups':
     sysadmins           => hiera('sysadmins', []),
     site_admin_password => hiera('groups_site_admin_password', 'XXX'),
     site_mysql_host     => hiera('groups_site_mysql_host', 'localhost'),
@@ -215,8 +191,8 @@ node 'groups.openstack.org' {
 }
 
 # Node-OS: precise
-node 'groups-dev.openstack.org' {
-  class { 'openstack_project::groups_dev':
+node 'groups-dev.elasticdb.org' {
+  class { 'tesora_cyclone::groups_dev':
     sysadmins           => hiera('sysadmins', []),
     site_admin_password => hiera('groups_dev_site_admin_password', 'XXX'),
     site_mysql_host     => hiera('groups_dev_site_mysql_host', 'localhost'),
@@ -226,16 +202,16 @@ node 'groups-dev.openstack.org' {
 }
 
 # Node-OS: precise
-node 'lists.openstack.org' {
-  class { 'openstack_project::lists':
+node 'lists.elasticdb.org' {
+  class { 'tesora_cyclone::lists':
     listadmins   => hiera('listadmins', []),
     listpassword => hiera('listpassword', 'XXX'),
   }
 }
 
 # Node-OS: precise
-node 'paste.openstack.org' {
-  class { 'openstack_project::paste':
+node 'paste.elasticdb.org' {
+  class { 'tesora_cyclone::paste':
     db_host     => hiera('paste_db_host', 'localhost'),
     db_password => hiera('paste_db_password', 'XXX'),
     sysadmins   => hiera('sysadmins', []),
@@ -243,16 +219,16 @@ node 'paste.openstack.org' {
 }
 
 # Node-OS: precise
-node 'planet.openstack.org' {
-  class { 'openstack_project::planet':
+node 'planet.elasticdb.org' {
+  class { 'tesora_cyclone::planet':
     sysadmins => hiera('sysadmins', []),
   }
 }
 
 # Node-OS: precise
-node 'eavesdrop.openstack.org' {
-  class { 'openstack_project::eavesdrop':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+node 'eavesdrop.elasticdb.org' {
+  class { 'tesora_cyclone::eavesdrop':
+    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
     nickpass                => hiera('openstack_meetbot_password', 'XXX'),
     sysadmins               => hiera('sysadmins', []),
     statusbot_nick          => hiera('statusbot_nick', 'username'),
@@ -262,7 +238,7 @@ node 'eavesdrop.openstack.org' {
     statusbot_auth_nicks    => 'jeblair, ttx, fungi, mordred, clarkb, sdague, SergeyLukjanov, jhesketh, lifeless',
     statusbot_wiki_user     => hiera('statusbot_wiki_username', 'username'),
     statusbot_wiki_password => hiera('statusbot_wiki_password', 'XXX'),
-    statusbot_wiki_url      => 'https://wiki.openstack.org/w/api.php',
+    statusbot_wiki_url      => 'https://wiki.elasticdb.org/w/api.php',
     statusbot_wiki_pageid   => '1781',
     accessbot_nick          => hiera('accessbot_nick', 'username'),
     accessbot_password      => hiera('accessbot_nick_password', 'XXX'),
@@ -270,8 +246,8 @@ node 'eavesdrop.openstack.org' {
 }
 
 # Node-OS: precise
-node 'etherpad.openstack.org' {
-  class { 'openstack_project::etherpad':
+node 'etherpad.elasticdb.org' {
+  class { 'tesora_cyclone::etherpad':
     ssl_cert_file_contents  => hiera('etherpad_ssl_cert_file_contents', 'XXX'),
     ssl_key_file_contents   => hiera('etherpad_ssl_key_file_contents', 'XXX'),
     ssl_chain_file_contents => hiera('etherpad_ssl_chain_file_contents', 'XXX'),
@@ -283,8 +259,8 @@ node 'etherpad.openstack.org' {
 }
 
 # Node-OS: precise
-node 'etherpad-dev.openstack.org' {
-  class { 'openstack_project::etherpad_dev':
+node 'etherpad-dev.elasticdb.org' {
+  class { 'tesora_cyclone::etherpad_dev':
     mysql_host          => hiera('etherpad-dev_db_host', 'localhost'),
     mysql_user          => hiera('etherpad-dev_db_user', 'username'),
     mysql_password      => hiera('etherpad-dev_db_password', 'XXX'),
@@ -293,8 +269,8 @@ node 'etherpad-dev.openstack.org' {
 }
 
 # Node-OS: precise
-node 'wiki.openstack.org' {
-  class { 'openstack_project::wiki':
+node 'wiki.elasticdb.org' {
+  class { 'tesora_cyclone::wiki':
     mysql_root_password     => hiera('wiki_db_password', 'XXX'),
     sysadmins               => hiera('sysadmins', []),
     ssl_cert_file_contents  => hiera('wiki_ssl_cert_file_contents', 'XXX'),
@@ -304,35 +280,30 @@ node 'wiki.openstack.org' {
 }
 
 # Node-OS: precise
-node 'logstash.openstack.org' {
-  class { 'openstack_project::logstash':
+node 'logstash.elasticdb.org' {
+  class { 'tesora_cyclone::logstash':
     sysadmins           => hiera('sysadmins', []),
     elasticsearch_nodes => $elasticsearch_nodes,
     gearman_workers     => $elasticsearch_clients,
     discover_nodes      => [
-      'elasticsearch02.openstack.org:9200',
-      'elasticsearch03.openstack.org:9200',
-      'elasticsearch04.openstack.org:9200',
-      'elasticsearch05.openstack.org:9200',
-      'elasticsearch06.openstack.org:9200',
-      'elasticsearch07.openstack.org:9200',
+      'elasticsearch02.elasticdb.org:9200',
     ],
   }
 }
 
 # Node-OS: precise
 node /^logstash-worker\d+\.openstack\.org$/ {
-  class { 'openstack_project::logstash_worker':
+  class { 'tesora_cyclone::logstash_worker':
     sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
     elasticsearch_clients => $elasticsearch_clients,
-    discover_node         => 'elasticsearch02.openstack.org',
+    discover_node         => 'elasticsearch02.elasticdb.org',
   }
 }
 
 # Node-OS: precise
 node /^elasticsearch0[1-7]\.openstack\.org$/ {
-  class { 'openstack_project::elasticsearch_node':
+  class { 'tesora_cyclone::elasticsearch_node':
     sysadmins             => hiera('sysadmins', []),
     elasticsearch_nodes   => $elasticsearch_nodes,
     elasticsearch_clients => $elasticsearch_clients,
@@ -342,15 +313,15 @@ node /^elasticsearch0[1-7]\.openstack\.org$/ {
 
 # A CentOS machine to load balance git access.
 # Node-OS: centos6
-node 'git.openstack.org' {
-  class { 'openstack_project::git':
+node 'git.elasticdb.org' {
+  class { 'tesora_cyclone::git':
     sysadmins               => hiera('sysadmins', []),
     balancer_member_names   => [
-      'git01.openstack.org',
-      'git02.openstack.org',
-      'git03.openstack.org',
-      'git04.openstack.org',
-      'git05.openstack.org',
+      'git01.elasticdb.org',
+      'git02.elasticdb.org',
+      'git03.elasticdb.org',
+      'git04.elasticdb.org',
+      'git05.elasticdb.org',
     ],
     balancer_member_ips     => [
       '198.61.223.164',
@@ -363,13 +334,13 @@ node 'git.openstack.org' {
 }
 
 # CentOS machines to run cgit and git daemon. Will be
-# load balanced by git.openstack.org.
+# load balanced by git.elasticdb.org.
 # Node-OS: centos6
 node /^git\d+\.openstack\.org$/ {
-  include openstack_project
-  class { 'openstack_project::git_backend':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
-    vhost_name              => 'git.openstack.org',
+  include tesora_cyclone
+  class { 'tesora_cyclone::git_backend':
+    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    vhost_name              => 'git.elasticdb.org',
     sysadmins               => hiera('sysadmins', []),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
     ssl_cert_file_contents  => hiera('git_ssl_cert_file_contents', 'XXX'),
@@ -382,24 +353,24 @@ node /^git\d+\.openstack\.org$/ {
 # Machines in each region to run PyPI mirrors.
 # Node-OS: precise
 node /^pypi\..*\.openstack\.org$/ {
-  class { 'openstack_project::pypi':
+  class { 'tesora_cyclone::pypi':
     sysadmins               => hiera('sysadmins', []),
   }
 }
 
 # A machine to run ODSREG in preparation for summits.
 # Node-OS: precise
-node 'summit.openstack.org' {
-  class { 'openstack_project::summit':
+node 'summit.elasticdb.org' {
+  class { 'tesora_cyclone::summit':
     sysadmins => hiera('sysadmins', []),
   }
 }
 
 # A machine to run Storyboard
 # Node-OS: precise
-node 'storyboard.openstack.org' {
-  class { 'openstack_project::storyboard':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+node 'storyboard.elasticdb.org' {
+  class { 'tesora_cyclone::storyboard':
+    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
@@ -414,9 +385,9 @@ node 'storyboard.openstack.org' {
 
 # A machine to serve static content.
 # Node-OS: precise
-node 'static.openstack.org' {
-  class { 'openstack_project::static':
-    project_config_repo     => 'https://git.openstack.org/openstack-infra/project-config',
+node 'static.elasticdb.org' {
+  class { 'tesora_cyclone::static':
+    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
     sysadmins               => hiera('sysadmins', []),
     swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user              => 'infra-files-ro',
@@ -429,10 +400,10 @@ node 'static.openstack.org' {
 
 # A machine to serve various project status updates.
 # Node-OS: precise
-node 'status.openstack.org' {
-  class { 'openstack_project::status':
+node 'status.elasticdb.org' {
+  class { 'tesora_cyclone::status':
     sysadmins                     => hiera('sysadmins', []),
-    gerrit_host                   => 'review.openstack.org',
+    gerrit_host                   => 'review.elasticdb.org',
     gerrit_ssh_host_key           => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     reviewday_ssh_public_key      => hiera('reviewday_rsa_pubkey_contents', 'XXX'),
     reviewday_ssh_private_key     => hiera('reviewday_rsa_key_contents', 'XXX'),
@@ -446,14 +417,14 @@ node 'status.openstack.org' {
 }
 
 # Node-OS: precise
-node 'nodepool.openstack.org' {
-  class { 'openstack_project::nodepool_prod':
-    project_config_repo      => 'https://git.openstack.org/openstack-infra/project-config',
+node 'nodepool.elasticdb.org' {
+  class { 'tesora_cyclone::nodepool_prod':
+    project_config_repo      => 'https://git.elasticdb.org/openstack-infra/project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     sysadmins                => hiera('sysadmins', []),
-    statsd_host              => 'graphite.openstack.org',
+    statsd_host              => 'graphite.elasticdb.org',
     jenkins_api_user         => hiera('jenkins_api_user', 'username'),
     jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),
     jenkins_credentials_id   => hiera('jenkins_credentials_id', 'XXX'),
@@ -470,48 +441,48 @@ node 'nodepool.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zuul.openstack.org' {
-  class { 'openstack_project::zuul_prod':
-    project_config_repo            => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server                  => 'review.openstack.org',
+node 'zuul.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_prod':
+    project_config_repo            => 'https://git.elasticdb.org/openstack-infra/project-config',
+    gerrit_server                  => 'review.elasticdb.org',
     gerrit_user                    => 'jenkins',
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents', 'XXX'),
-    url_pattern                    => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
+    url_pattern                    => 'http://logs.elasticdb.org/{build.parameters[LOG_PATH]}',
     swift_authurl                  => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user                     => 'infra-files-rw',
     swift_key                      => hiera('infra_files_rw_password', 'XXX'),
     swift_tenant_name              => hiera('infra_files_tenant_name', 'tenantname'),
     swift_region_name              => 'DFW',
     swift_default_container        => 'infra-files',
-    swift_default_logserver_prefix => 'http://logs.openstack.org/',
-    zuul_url                       => 'http://zuul.openstack.org/p',
+    swift_default_logserver_prefix => 'http://logs.elasticdb.org/',
+    zuul_url                       => 'http://zuul.elasticdb.org/p',
     sysadmins                      => hiera('sysadmins', []),
-    statsd_host                    => 'graphite.openstack.org',
+    statsd_host                    => 'graphite.elasticdb.org',
     gearman_workers                => [
-      'nodepool.openstack.org',
-      'jenkins.openstack.org',
-      'jenkins01.openstack.org',
-      'jenkins02.openstack.org',
-      'jenkins03.openstack.org',
-      'jenkins04.openstack.org',
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
-      'zm01.openstack.org',
-      'zm02.openstack.org',
-      'zm03.openstack.org',
-      'zm04.openstack.org',
+      'nodepool.elasticdb.org',
+      'jenkins.elasticdb.org',
+      'jenkins01.elasticdb.org',
+      'jenkins02.elasticdb.org',
+      'jenkins03.elasticdb.org',
+      'jenkins04.elasticdb.org',
+      'jenkins05.elasticdb.org',
+      'jenkins06.elasticdb.org',
+      'jenkins07.elasticdb.org',
+      'jenkins-dev.elasticdb.org',
+      'zm01.elasticdb.org',
+      'zm02.elasticdb.org',
+      'zm03.elasticdb.org',
+      'zm04.elasticdb.org',
     ],
   }
 }
 
 # Node-OS: precise
-node 'zm01.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
+node 'zm01.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_merger':
+    gearman_server       => 'zuul.elasticdb.org',
+    gerrit_server        => 'review.elasticdb.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
@@ -520,10 +491,10 @@ node 'zm01.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zm02.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
+node 'zm02.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_merger':
+    gearman_server       => 'zuul.elasticdb.org',
+    gerrit_server        => 'review.elasticdb.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
@@ -532,10 +503,10 @@ node 'zm02.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zm03.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
+node 'zm03.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_merger':
+    gearman_server       => 'zuul.elasticdb.org',
+    gerrit_server        => 'review.elasticdb.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
@@ -544,10 +515,10 @@ node 'zm03.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zm04.openstack.org' {
-  class { 'openstack_project::zuul_merger':
-    gearman_server       => 'zuul.openstack.org',
-    gerrit_server        => 'review.openstack.org',
+node 'zm04.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_merger':
+    gearman_server       => 'zuul.elasticdb.org',
+    gerrit_server        => 'review.elasticdb.org',
     gerrit_user          => 'jenkins',
     gerrit_ssh_host_key  => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key => hiera('zuul_ssh_private_key_contents', 'XXX'),
@@ -556,33 +527,27 @@ node 'zm04.openstack.org' {
 }
 
 # Node-OS: precise
-node 'zuul-dev.openstack.org' {
-  class { 'openstack_project::zuul_dev':
-    project_config_repo  => 'https://git.openstack.org/openstack-infra/project-config',
-    gerrit_server        => 'review-dev.openstack.org',
+node 'zuul-dev.elasticdb.org' {
+  class { 'tesora_cyclone::zuul_dev':
+    project_config_repo  => 'https://git.elasticdb.org/openstack-infra/project-config',
+    gerrit_server        => 'review-dev.elasticdb.org',
     gerrit_user          => 'zuul-dev',
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
-    url_pattern          => 'http://logs.openstack.org/{build.parameters[LOG_PATH]}',
-    zuul_url             => 'http://zuul-dev.openstack.org/p',
+    url_pattern          => 'http://logs.elasticdb.org/{build.parameters[LOG_PATH]}',
+    zuul_url             => 'http://zuul-dev.elasticdb.org/p',
     sysadmins            => hiera('sysadmins', []),
-    statsd_host          => 'graphite.openstack.org',
+    statsd_host          => 'graphite.elasticdb.org',
     gearman_workers      => [
-      'jenkins.openstack.org',
-      'jenkins01.openstack.org',
-      'jenkins02.openstack.org',
-      'jenkins03.openstack.org',
-      'jenkins04.openstack.org',
-      'jenkins05.openstack.org',
-      'jenkins06.openstack.org',
-      'jenkins07.openstack.org',
-      'jenkins-dev.openstack.org',
+      'jenkins.elasticdb.org',
+      'jenkins01.elasticdb.org',
+      'jenkins-dev.elasticdb.org',
     ],
   }
 }
 
 # Node-OS: centos6
-node 'pbx.openstack.org' {
-  class { 'openstack_project::pbx':
+node 'pbx.elasticdb.org' {
+  class { 'tesora_cyclone::pbx':
     sysadmins     => hiera('sysadmins', []),
     sip_providers => [
       {
@@ -599,28 +564,28 @@ node 'pbx.openstack.org' {
 # Node-OS: precise
 # A backup machine.  Don't run cron or puppet agent on it.
 node /^ci-backup-.*\.openstack\.org$/ {
-  include openstack_project::backup_server
+  include tesora_cyclone::backup_server
 }
 
 # Node-OS: precise
-node 'proposal.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::proposal_slave':
+node 'proposal.slave.elasticdb.org' {
+  include tesora_cyclone
+  class { 'tesora_cyclone::proposal_slave':
     transifex_username       => 'openstackjenkins',
     transifex_password       => hiera('transifex_password', 'XXX'),
-    jenkins_ssh_public_key   => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key   => $tesora_cyclone::jenkins_ssh_key,
     proposal_ssh_public_key  => hiera('proposal_ssh_public_key_contents', 'XXX'),
     proposal_ssh_private_key => hiera('proposal_ssh_private_key_contents', 'XXX'),
   }
 }
 
 # Node-OS: precise
-node 'pypi.slave.openstack.org' {
-  include openstack_project
-  class { 'openstack_project::pypi_slave':
+node 'pypi.slave.elasticdb.org' {
+  include tesora_cyclone
+  class { 'tesora_cyclone::pypi_slave':
     pypi_username          => 'openstackci',
     pypi_password          => hiera('pypi_password', 'XXX'),
-    jenkins_ssh_public_key => $openstack_project::jenkins_ssh_key,
+    jenkins_ssh_public_key => $tesora_cyclone::jenkins_ssh_key,
     jenkinsci_username     => hiera('jenkins_ci_org_user', 'username'),
     jenkinsci_password     => hiera('jenkins_ci_org_password', 'XXX'),
     mavencentral_username  => hiera('mavencentral_org_user', 'username'),
@@ -629,8 +594,8 @@ node 'pypi.slave.openstack.org' {
 }
 
 # Node-OS: precise
-node 'openstackid-dev.openstack.org' {
-  class { 'openstack_project::openstackid_dev':
+node 'openstackid-dev.elasticdb.org' {
+  class { 'tesora_cyclone::openstackid_dev':
     sysadmins               => hiera('sysadmins', []),
     site_admin_password     => hiera('openstackid_dev_site_admin_password', 'XXX'),
     id_mysql_host           => hiera('openstackid_dev_id_mysql_host', 'localhost'),
