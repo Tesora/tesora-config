@@ -1,11 +1,13 @@
 # == Class: tesora_cyclone::puppetmaster
 #
 class tesora_cyclone::puppetmaster (
-  $root_rsa_key,
+  # BH: added default
+  $root_rsa_key = '',
   $sysadmins = [],
   $version   = '3.',
   $ca_server = undef,
-  $puppetdb = true,
+  # BH: was true:
+  $puppetdb = false,
   $puppetdb_server = 'puppetdb.openstack.org',
 ) {
   include logrotate
