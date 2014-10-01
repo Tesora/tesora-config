@@ -1,0 +1,19 @@
+# == Class: tesora_cyclone::paste
+#
+class tesora_cyclone::paste (
+  $db_host,
+  $db_password,
+  $sysadmins = []
+) {
+  class { 'tesora_cyclone::server':
+    iptables_public_tcp_ports => [80],
+    sysadmins                 => $sysadmins,
+  }
+  include lodgeit
+  lodgeit::site { 'openstack':
+    db_host     => $db_host,
+    db_password => $db_password,
+    port        => '5000',
+    image       => 'header-bg2.png',
+  }
+}
