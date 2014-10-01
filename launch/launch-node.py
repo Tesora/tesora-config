@@ -134,7 +134,9 @@ def build_server(
     key = None
     server = None
 
-    create_kwargs = dict(image=image, flavor=flavor, name=name)
+    # BH: HARDCODE
+    nics = [ { 'net-id': u'b25625cc-2f6b-48c2-b740-08e2b0503a19' } ]
+    create_kwargs = dict(image=image, flavor=flavor, name=name, nics=nics)
 
     key_name = 'launch-%i' % (time.time())
     if 'os-keypairs' in utils.get_extensions(client):
