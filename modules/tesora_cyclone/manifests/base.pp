@@ -79,11 +79,10 @@ class tesora_cyclone::base(
     }
 
     realize (
-      User::Virtual::Localuser['mordred'],
-      User::Virtual::Localuser['corvus'],
-      User::Virtual::Localuser['clarkb'],
-      User::Virtual::Localuser['fungi'],
-      User::Virtual::Localuser['slukjanov'],
+      User::Virtual::Localuser['andrew'],
+      User::Virtual::Localuser['amrith'],
+      User::Virtual::Localuser['bhunter'],
+      User::Virtual::Localuser['doug'],
     )
   }
 
