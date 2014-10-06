@@ -93,9 +93,12 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
                        'mount_volume.sh')
         ssh_client.ssh('bash -x mount_volume.sh')
 
+    # BH: hack around temporary lack of DNS
+    ssh_client.ssh('sudo echo "173.247.96.235  ci-puppetmaster.elasticdb.org" >> /etc/hosts')
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
-    ssh_client.ssh('bash -x install_puppet.sh')
+    # install correct puppet
+    ssh_client.ssh('export PUPPET_VERSION=2.7 && bash -x install_puppet.sh')
 
     certname = cert[:(0 - len('.pem'))]
     ssh_client.ssh("mkdir -p /var/lib/puppet/ssl/certs")
