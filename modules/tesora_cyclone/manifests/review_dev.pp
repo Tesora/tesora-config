@@ -20,8 +20,8 @@ class tesora_cyclone::review_dev (
   $lp_sync_token = '',
   $lp_sync_secret = '',
   $sysadmins = [],
-  $swift_username = '',
-  $swift_password = '',
+#BH:REMOVE  $swift_username = '',
+#BH:REMOVE  $swift_password = '',
   $project_config_repo = '',
 ) {
 
@@ -70,8 +70,8 @@ class tesora_cyclone::review_dev (
     gitweb                          => false,
     cgit                            => true,
     web_repo_url                    => 'https://git.openstack.org/cgit/',
-    swift_username                  => $swift_username,
-    swift_password                  => $swift_password,
+#BH:REMOVE    swift_username                  => $swift_username,
+#BH:REMOVE    swift_password                  => $swift_password,
     replication                     => [
       {
         name                 => 'github',
