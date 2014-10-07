@@ -72,7 +72,7 @@ class tesora_cyclone::review (
   $lp_sync_secret='',
   # For gerrit's contactstore feature
   # https://review.openstack.org/Documentation/config-contact.html
-  $contactstore = true,
+  $contactstore = false,
   $contactstore_appsec='',
   $contactstore_pubkey='',
   $sysadmins = [],
@@ -135,56 +135,56 @@ class tesora_cyclone::review (
 #BH:REMOVE    swift_username                      => $swift_username,
 #BH:REMOVE    swift_password                      => $swift_password,
     replication                         => [
-      {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
-        replicationDelay     => '1',
-        replicatePermissions => false,
-        mirror               => true,
-      },
-      {
-        name                 => 'local',
-        url                  => 'file:///opt/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git01',
-        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git02',
-        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git03',
-        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git04',
-        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
-      {
-        name                 => 'git05',
-        url                  => 'cgit@git05.openstack.org:/var/lib/git/',
-        replicationDelay     => '1',
-        threads              => '4',
-        mirror               => true,
-      },
+#BH:REMOVEfalse{
+#BH:REMOVE        name                 => 'github',
+#BH:REMOVE        url                  => 'git@github.com:',
+#BH:REMOVE        authGroup            => 'Anonymous Users',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        replicatePermissions => false,
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
+    {
+      name                 => 'local',
+      url                  => 'file:///opt/lib/git/',
+      replicationDelay     => '1',
+      threads              => '4',
+      mirror               => true,
+    },
+#BH:REMOVE      {
+#BH:REMOVE        name                 => 'git01',
+#BH:REMOVE        url                  => 'cgit@git01.openstack.org:/var/lib/git/',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        threads              => '4',
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
+#BH:REMOVE      {
+#BH:REMOVE        name                 => 'git02',
+#BH:REMOVE        url                  => 'cgit@git02.openstack.org:/var/lib/git/',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        threads              => '4',
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
+#BH:REMOVE      {
+#BH:REMOVE        name                 => 'git03',
+#BH:REMOVE        url                  => 'cgit@git03.openstack.org:/var/lib/git/',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        threads              => '4',
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
+#BH:REMOVE      {
+#BH:REMOVE        name                 => 'git04',
+#BH:REMOVE        url                  => 'cgit@git04.openstack.org:/var/lib/git/',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        threads              => '4',
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
+#BH:REMOVE      {
+#BH:REMOVE        name                 => 'git05',
+#BH:REMOVE        url                  => 'cgit@git05.openstack.org:/var/lib/git/',
+#BH:REMOVE        replicationDelay     => '1',
+#BH:REMOVE        threads              => '4',
+#BH:REMOVE        mirror               => true,
+#BH:REMOVE      },
     ],
     require                             => $::project_config::config_dir,
   }
@@ -193,17 +193,17 @@ class tesora_cyclone::review (
     version => 'e00d5af',
   }
 
-  class { 'gerritbot':
-    nick                    => 'openstackgerrit',
-    password                => $gerritbot_password,
-    server                  => 'irc.freenode.net',
-    user                    => 'gerritbot',
-    vhost_name              => $::fqdn,
-    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
-    channel_file            => $::project_config::gerritbot_channel_file,
-    require                 => $::project_config::config_dir,
-  }
+#BH:REMOVE  class { 'gerritbot':
+#BH:REMOVE    nick                    => 'openstackgerrit',
+#BH:REMOVE    password                => $gerritbot_password,
+#BH:REMOVE    server                  => 'irc.freenode.net',
+#BH:REMOVE    user                    => 'gerritbot',
+#BH:REMOVE    vhost_name              => $::fqdn,
+#BH:REMOVE    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
+#BH:REMOVE    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+#BH:REMOVE    channel_file            => $::project_config::gerritbot_channel_file,
+#BH:REMOVE    require                 => $::project_config::config_dir,
+#BH:REMOVE  }
   class { 'gerrit::remotes':
     ensure => absent,
   }

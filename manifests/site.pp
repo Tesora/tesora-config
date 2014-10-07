@@ -28,7 +28,7 @@ node default {
 # Node-OS: precise
 node 'review.elasticdb.org' {
   class { 'tesora_cyclone::review':
-    project_config_repo                 => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo                 => 'https://github.com/Tesora/tesora-config.git',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
