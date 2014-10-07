@@ -8,7 +8,7 @@ class tesora_cyclone::gerrit (
   $mysql_password,
   $vhost_name = $::fqdn,
   $canonicalweburl = "https://${::fqdn}/",
-  $serveradmin = 'release@tesora.com',
+  $serveradmin = 'bhunter@tesora.com',
   $ssh_host_key = '/home/gerrit2/review_site/etc/ssh_host_rsa_key',
   $ssh_project_key = '/home/gerrit2/review_site/etc/ssh_project_rsa_key',
   $ssl_cert_file = "/etc/ssl/certs/${::fqdn}.pem",

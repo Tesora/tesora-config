@@ -57,8 +57,8 @@ node 'review.elasticdb.org' {
     contactstore_appsec                 => hiera('gerrit_contactstore_appsec', 'XXX'),
     contactstore_pubkey                 => hiera('gerrit_contactstore_pubkey', 'XXX'),
     sysadmins                           => hiera('sysadmins', []),
-    swift_username                      => hiera('swift_store_user', 'username'),
-    swift_password                      => hiera('swift_store_key', 'XXX'),
+#    swift_username                      => hiera('swift_store_user', 'username'),
+#    swift_password                      => hiera('swift_store_key', 'XXX'),
   }
 }
 
