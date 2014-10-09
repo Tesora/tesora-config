@@ -1,0 +1,3 @@
+- project: tesora/trove
+  description: Tesora's Trove Fork
+  upstream: https://github.com/Tesora/tesora-trove
