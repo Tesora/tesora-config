@@ -1,0 +1,65 @@
+WIP, merging in other steps as they pass
+
+
+This document describes the process I used to create Tesora CI.
+
+start puppetmaster and review servers of appopriate sizes
+   build.puppet_prod, build.review_prod.  
+   ubuntu 12.04, build key, internal, etc.
+   (due to issues, uploaded clean ubuntu12.04-ci image)
+
+create and attach data volume to gerrit, 
+   create 100GB volume. Attach to instance
+   ssh into review.
+   sudo mkdir /home/gerrit2
+   sudo run the guts of mount_volume.sh, but /dev/sdb and /home/gerrit2
+   I touch /home/gerrit/testfile, rebooted just to make sure it stuck
+
+setup puppetmaster.
+log into host.  become root and run this stuff:
+
+apt-get update
+apt-get upgrade -y
+apt-get install -y git
+git clone https://github.com/Tesora/tesora-config.git /opt/config/production
+
+#BH: the following necessary to not install puppet 3.x
+PUPPET_VERSION=2.7 /opt/config/production/install_puppet.sh
+apt-get install -y puppetmaster-passenger hiera hiera-puppet
+
+/opt/config/production/install_modules.sh
+mkdir -p /etc/puppet/hieradata/production
+
+
+Manually, PROVIDE common.yaml and place it in /etc/puppet/hieradata/production/
+(This contains secrets, and is generally outside the scope of this document, but encrypted production data has been placed in the git repo)
+
+run all this stuff as root:
+
+chown -R puppet:puppet /etc/puppet/hieradata/
+chmod -R 0711 /etc/puppet/hieradata/
+chmod 0600 /etc/puppet/hieradata/production/common.yaml
+
+#become the puppet server:
+echo "ci-puppetmaster.elasticdb.org" > /etc/hostname
+service hostname restart
+puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -e 'include tesora_cyclone::puppetmaster'
+
+
+
+# Configure your launch environment (prep for bringing up hosts)
+
+see /opt/config/production/launch/launch.sh
+PROVIDE ~/ci-launch.sh script.    (This is a openstack rc file. based on bluebox, but password added inline for convenience) 
+
+Puppetboard:
+
+edit launch.sh
+do some of 
+export FQDN="puppetdb.elasticdb.org"
+puppet cert generate $FQDN
+
+MySQL:
+
+
+

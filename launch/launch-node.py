@@ -93,8 +93,8 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
                        'mount_volume.sh')
         ssh_client.ssh('bash -x mount_volume.sh')
 
-    # BH: hack around temporary lack of DNS
-    ssh_client.ssh('sudo echo "173.247.96.235  ci-puppetmaster.elasticdb.org" >> /etc/hosts')
+    # BH: Life seems better with this faked FQDN.  It's not real.
+    ssh_client.ssh('sudo echo "10.240.28.27  ci-puppetmaster.openstacklocal" >> /etc/hosts')
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
     # install correct puppet
