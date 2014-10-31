@@ -1,20 +1,15 @@
 WIP, merging in other steps as they pass
 
-
 This document describes the process I used to create Tesora CI.
+This process is complemented by source in https://github.com/Tesora/tesora-config.git which:
+- provide tooling to launch nodes in our environment.
+- provide customization to the upstream puppet modules, for our environment
+- provide settings and secrets appropriate for our environment.
 
-start puppetmaster and review servers of appopriate sizes
-   build.puppet_prod, build.review_prod.  
-   ubuntu 12.04, build key, internal, etc.
-   (due to issues, uploaded clean ubuntu12.04-ci image)
+Without further ado:
 
-create and attach data volume to gerrit, 
-   create 100GB volume. Attach to instance
-   ssh into review.
-   sudo mkdir /home/gerrit2
-   sudo run the guts of mount_volume.sh, but /dev/sdb and /home/gerrit2
-   I touch /home/gerrit/testfile, rebooted just to make sure it stuck
-
+start puppetmaster server with flavor build.puppet_prod ubuntu 12.04, build key, internal, etc.
+(due to issues with the global one, I uploaded a ubuntu12.04-ci image I had just downloaded)
 
 setup puppetmaster.
 log into host.  become root and run this stuff:
@@ -24,13 +19,11 @@ apt-get upgrade -y
 apt-get install -y git
 git clone https://github.com/Tesora/tesora-config.git /opt/config/production
 
-#BH: the following necessary to not install puppet 3.x
 PUPPET_VERSION=2.7 /opt/config/production/install_puppet.sh
 apt-get install -y puppetmaster-passenger hiera hiera-puppet
 
 /opt/config/production/install_modules.sh
 mkdir -p /etc/puppet/hieradata/production
-
 
 Manually, PROVIDE common.yaml and place it in /etc/puppet/hieradata/production/
 (This contains secrets, and is generally outside the scope of this document, but encrypted production data has been placed in the git repo)
@@ -50,8 +43,10 @@ puppet apply --modulepath='/opt/config/production/modules:/etc/puppet/modules' -
 # Configure your launch environment (prep for bringing up hosts)
 
 see /opt/config/production/launch/launch.sh
-PROVIDE ~/ci-launch.sh script.    (This is a openstack rc file. based on bluebox, but password added inline for convenience) 
+PROVIDE ~ubuntu/ci-launch.sh script.    
+(This is a openstack rc file. based on bluebox, but password added inline for convenience) 
 
+the one I used 
 Puppetboard:
 
 edit launch.sh
@@ -81,11 +76,40 @@ node /^ci-mysql.*/ {
 }
 EOF
 
-sudo puppet apply --modulepath='/home/ubuntu/.puppet/modules/:/etc/puppet/modules' manifests/site.pp
+sudo puppet apply --modulepath='/home/ubuntu/.puppet/modules/:/etc/puppet/modules' .puppet/manifests/site.pp
 
 CREATE USER 'gerrit2'@'%' IDENTIFIED BY '<<<<REPLACEME>>>>>';
 CREATE DATABASE reviewdb;
-GRANT ALL PRIVILEGES ON *.* TO 'gerrit2'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON reviewdb.* TO 'gerrit2'@'%' WITH GRANT OPTION;
 
-mysqladmin -u root -p flush-hosts
+mysqladmin flush-hosts
+
+
+
+Review:
+
+On the puppetmaster, run launchreview.sh
+
+Attach a security profile with 443/80 and you might see something.
+Note:  it's possible you may have to edit _default_ into the apache vhost config. 
+
+We're following instructions here:
+https://git.openstack.org/cgit/openstack-infra/system-config/tree/doc/source/gerrit.rst
+
+Skip the mysql CLA bit, it doesn't work currently.
+ERROR 1146 (42S02): Table 'reviewdb.contributor_agreements' doesn't exist
+
+
+Create all the groups they specify.
+
+
+
+
+
+create and attach data volume to gerrit, 
+   create 100GB volume. Attach to instance
+   ssh into review.
+   sudo mkdir /home/gerrit2
+   sudo run the guts of mount_volume.sh, but /dev/sdb and /home/gerrit2
+   I touch /home/gerrit/testfile, rebooted just to make sure it stuck
 
