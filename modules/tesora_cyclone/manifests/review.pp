@@ -103,7 +103,7 @@ class tesora_cyclone::review (
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
     ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
-    email                               => 'review@openstack.org',
+    email                               => 'review@elasticdb.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '150',
     container_heaplimit                 => '8g',
@@ -228,9 +228,9 @@ class tesora_cyclone::review (
     require => User['gerrit2'],
   }
 
-  include bup
-  bup::site { 'rs-ord':
-    backup_user   => 'bup-review',
-    backup_server => 'ci-backup-rs-ord.openstack.org',
-  }
+#BH:REMOVE_FOR_NOW  include bup
+#BH:REMOVE_FOR_NOW  bup::site { 'rs-ord':
+#BH:REMOVE_FOR_NOW    backup_user   => 'bup-review',
+#BH:REMOVE_FOR_NOW    backup_server => 'ci-backup-rs-ord.openstack.org',
+#BH:REMOVE_FOR_NOW  }
 }

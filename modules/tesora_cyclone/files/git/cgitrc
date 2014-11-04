@@ -15,7 +15,7 @@ cache-repo-ttl=1
 cache-root-ttl=1
 
 # Specify some default clone prefixes
-clone-prefix=git://git.openstack.org https://git.openstack.org
+clone-prefix=git://git.elasticdb.org https://git.elasticdb.org
 
 # Specify a command which will be invoked to format commit messages
 commit-filter=/usr/local/bin/commit-filter.sh

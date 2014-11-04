@@ -8,7 +8,7 @@ class tesora_cyclone::puppetmaster (
   $ca_server = undef,
   # BH: was true:
   $puppetdb = false,
-  $puppetdb_server = 'puppetdb.openstack.org',
+  $puppetdb_server = 'puppetboard.elasticdb.org',
 ) {
   include logrotate
   include tesora_cyclone::params

@@ -1,7 +1,7 @@
-ask.openstack.org 443
-etherpad.openstack.org 443
-git.openstack.org 443
-jenkins.openstack.org 443
-review.openstack.org 443
-wiki.openstack.org 443
-www.openstack.org 443
+ask.elasticdb.org 443
+etherpad.elasticdb.org 443
+git.elasticdb.org 443
+jenkins.elasticdb.org 443
+review.elasticdb.org 443
+wiki.elasticdb.org 443
+www.elasticdb.org 443
