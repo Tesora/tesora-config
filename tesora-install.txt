@@ -99,8 +99,39 @@ https://git.openstack.org/cgit/openstack-infra/system-config/tree/doc/source/ger
 Skip the mysql CLA bit, it doesn't work currently.
 ERROR 1146 (42S02): Table 'reviewdb.contributor_agreements' doesn't exist
 
-
 Create all the groups they specify.
+
+Create the openstack-project-creator generally as specified.
+I had to find my project pub key in hiera.
+And, had to provde -i mykey.pem on the cli - no password.
+
+
+add hostkey github.com as specified.
+
+
+
+add accounts in the UI:
+
+`Project Bootstrappers` grants all the permissions needed to set up a new project.
+
+`Third-Party CI` group is used to grant +/-1 Verified access to external testing tools on a sandbox project.
+
+`Voting Third-Party CI` group is used to grant +/-1 Verified access to external testing tools for all projects.
+
+`Continuous Integration Tools` group contains Jenkins and any other CI tools that get +2/-2 access on reviews.
+
+`Release Managers` group is used for release managers.
+
+`openstack-stable-maint` group is used for people maintaining stable
+branches - often distinct from the folk maintaining projects.
+
+
+
+
+find groups:
+bhunter@review:~/temp/All-Projects-ACLs$ grep group project.config | sed 's/.*group //g'|sort|uniq
+
+
 
 
 
