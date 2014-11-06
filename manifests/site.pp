@@ -28,7 +28,7 @@ node default {
 # Node-OS: precise
 node 'review.elasticdb.org' {
   class { 'tesora_cyclone::review':
-    project_config_repo                 => 'https://github.com/Tesora/tesora-config.git',
+    project_config_repo                 => 'https://github.com/Tesora/tesora-project-config',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
@@ -65,7 +65,7 @@ node 'review.elasticdb.org' {
 # Node-OS: precise
 node 'review-dev.elasticdb.org' {
   class { 'tesora_cyclone::review_dev':
-    project_config_repo             => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo             => 'https://github.com/Tesora/tesora-project-config',
     github_oauth_token              => hiera('gerrit_dev_github_token', 'XXX'),
     github_project_username         => hiera('github_dev_project_username', 'username'),
     github_project_password         => hiera('github_dev_project_password', 'XXX'),
@@ -90,7 +90,7 @@ node 'review-dev.elasticdb.org' {
 # Node-OS: precise
 node 'jenkins.elasticdb.org' {
   class { 'tesora_cyclone::jenkins':
-    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file_contents  => hiera('jenkins_ssl_cert_file_contents', 'XXX'),
@@ -228,7 +228,7 @@ node 'planet.elasticdb.org' {
 # Node-OS: precise
 node 'eavesdrop.elasticdb.org' {
   class { 'tesora_cyclone::eavesdrop':
-    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     nickpass                => hiera('openstack_meetbot_password', 'XXX'),
     sysadmins               => hiera('sysadmins', []),
     statusbot_nick          => hiera('statusbot_nick', 'username'),
@@ -339,7 +339,7 @@ node 'git.elasticdb.org' {
 node /^git\d+\.openstack\.org$/ {
   include tesora_cyclone
   class { 'tesora_cyclone::git_backend':
-    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     vhost_name              => 'git.elasticdb.org',
     sysadmins               => hiera('sysadmins', []),
     git_gerrit_ssh_key      => hiera('gerrit_replication_ssh_rsa_pubkey_contents', 'XXX'),
@@ -370,7 +370,7 @@ node 'summit.elasticdb.org' {
 # Node-OS: precise
 node 'storyboard.elasticdb.org' {
   class { 'tesora_cyclone::storyboard':
-    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     sysadmins               => hiera('sysadmins', []),
     mysql_host              => hiera('storyboard_db_host', 'localhost'),
     mysql_user              => hiera('storyboard_db_user', 'username'),
@@ -387,7 +387,7 @@ node 'storyboard.elasticdb.org' {
 # Node-OS: precise
 node 'static.elasticdb.org' {
   class { 'tesora_cyclone::static':
-    project_config_repo     => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     sysadmins               => hiera('sysadmins', []),
     swift_authurl           => 'https://identity.api.rackspacecloud.com/v2.0/',
     swift_user              => 'infra-files-ro',
@@ -419,7 +419,7 @@ node 'status.elasticdb.org' {
 # Node-OS: precise
 node 'nodepool.elasticdb.org' {
   class { 'tesora_cyclone::nodepool_prod':
-    project_config_repo      => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo      => 'https://github.com/Tesora/tesora-project-config',
     mysql_password           => hiera('nodepool_mysql_password', 'XXX'),
     mysql_root_password      => hiera('nodepool_mysql_root_password', 'XXX'),
     nodepool_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
@@ -443,7 +443,7 @@ node 'nodepool.elasticdb.org' {
 # Node-OS: precise
 node 'zuul.elasticdb.org' {
   class { 'tesora_cyclone::zuul_prod':
-    project_config_repo            => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo            => 'https://github.com/Tesora/tesora-project-config',
     gerrit_server                  => 'review.elasticdb.org',
     gerrit_user                    => 'jenkins',
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
@@ -529,7 +529,7 @@ node 'zm04.elasticdb.org' {
 # Node-OS: precise
 node 'zuul-dev.elasticdb.org' {
   class { 'tesora_cyclone::zuul_dev':
-    project_config_repo  => 'https://git.elasticdb.org/openstack-infra/project-config',
+    project_config_repo  => 'https://github.com/Tesora/tesora-project-config',
     gerrit_server        => 'review-dev.elasticdb.org',
     gerrit_user          => 'zuul-dev',
     zuul_ssh_private_key => hiera('zuul_dev_ssh_private_key_contents', 'XXX'),
@@ -563,7 +563,7 @@ node 'pbx.elasticdb.org' {
 
 # Node-OS: precise
 # A backup machine.  Don't run cron or puppet agent on it.
-node /^ci-backup-.*\.openstack\.org$/ {
+node /^ci-backup-.*\.elasticdb\.org$/ {
   include tesora_cyclone::backup_server
 }
 
