@@ -72,6 +72,7 @@ class recheckwatch (
     owner   => 'recheckwatch',
     mode    => '0755',
     require => User['recheckwatch'],
+    recurse => true,
   }
 
   file { '/var/lib/recheckwatch':
