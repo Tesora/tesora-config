@@ -460,20 +460,6 @@ node 'zuul.elasticdb.org' {
     sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.elasticdb.org',
     gearman_workers                => [
-      'nodepool.elasticdb.org',
-      'jenkins.elasticdb.org',
-      'jenkins01.elasticdb.org',
-      'jenkins02.elasticdb.org',
-      'jenkins03.elasticdb.org',
-      'jenkins04.elasticdb.org',
-      'jenkins05.elasticdb.org',
-      'jenkins06.elasticdb.org',
-      'jenkins07.elasticdb.org',
-      'jenkins-dev.elasticdb.org',
-      'zm01.elasticdb.org',
-      'zm02.elasticdb.org',
-      'zm03.elasticdb.org',
-      'zm04.elasticdb.org',
     ],
   }
 }

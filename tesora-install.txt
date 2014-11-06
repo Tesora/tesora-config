@@ -99,12 +99,6 @@ https://git.openstack.org/cgit/openstack-infra/system-config/tree/doc/source/ger
 Skip the mysql CLA bit, it doesn't work currently.
 ERROR 1146 (42S02): Table 'reviewdb.contributor_agreements' doesn't exist
 
-Create all the groups they specify.
-
-Create the openstack-project-creator generally as specified.
-I had to find my project pub key in hiera.
-And, had to provde -i mykey.pem on the cli - no password.
-
 
 add hostkey github.com as specified.
 
@@ -126,14 +120,63 @@ add accounts in the UI:
 branches - often distinct from the folk maintaining projects.
 
 
+Add a couple extra tesora groups:
+`Tesora Developers`
+`tesora-core`
 
 
-find groups:
-bhunter@review:~/temp/All-Projects-ACLs$ grep group project.config | sed 's/.*group //g'|sort|uniq
+create the admin user
+
+pubkey="gerrit.pub"
+
+cat > $pubkey << EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCmTqqlgzh9dBdY93aRRIcwuDW7CZvmgq4R1H8ocCbkg/SCaAQMgikmVMd3d3IVG/+JrRVrmWxGyDolG00GehPP/xsFX+qHQsERrT/6xe+/0+1bt14mVBMIiMkMTBYWmmhp7trON9HWagak/L4evq4ZI7vbmV7oJWCb4xcApe+yajLNPUMwnoIvdBq50HWVlmhI5Wf6rQaWDGBylYa4CAVXW6LaQ96eLLDTTF7kPUfnX461zgF0Zy/8p6ylcI7vl80tAEx4bjR/vhJBvS9VjoSLPA9DmSrY7lzibTtos2ZFD81jxDoozD/P/NfEDhDF31xQdiYmwLDqZBnR6uwqItmX bhunter@bhunter-laptop
+EOF
+
+# private key generated on the spot associated with your login
+mypriv="<<CUSTOMIZE ME>>"
+
+cat $pubkey | ssh -i $mypriv -p 29418 bhunter@localhost gerrit create-account \
+    --group "'Project Bootstrappers'" \
+    --group Administrators \
+    --full-name "'Project Creator'" \
+    --email openstack-infra@lists.elasticdb.org \
+    --ssh-key - openstack-project-creator
+
+
+Assuming success, run:
+
+
+#!/bin/bash -ex
+export USER=bhunter
+export HOST=localhost
+
+mkdir temp
+cd temp
+
+mkdir All-Projects-ACLs
+cd All-Projects-ACLs
+
+git init
+git remote add gerrit ssh://$USER@$HOST:29418/All-Projects.git
+git fetch gerrit +refs/meta/*:refs/remotes/gerrit-meta/*
+git checkout -b config remotes/gerrit-meta/config
+
+cd temp/All-Projects-ACLs
+sed -if 's/Registered Users/Tesora Developers/g' project.config 
+sed -if 's/Anonymous Users/Tesora Developers/g' project.config 
+
+#find groups:
+grep group project.config | sed 's/.*group //g'|sort|uniq
 
 
 
+manually edit the groups file.
 
+
+
+git commit -am "Initial All-Projects config"
+git push gerrit HEAD:refs/meta/config
 
 
 
