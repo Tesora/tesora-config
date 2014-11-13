@@ -104,17 +104,16 @@ node 'jenkins.elasticdb.org' {
 }
 
 # Node-OS: precise
-node /^jenkins\d+\.openstack\.org$/ {
+node /^jenkins\d+\.elasticdb\.org$/ {
   class { 'tesora_cyclone::jenkins':
+    project_config_repo     => 'https://github.com/Tesora/tesora-project-config',
     jenkins_jobs_password   => hiera('jenkins_jobs_password', 'XXX'),
     jenkins_ssh_private_key => hiera('jenkins_ssh_private_key_contents', 'XXX'),
     ssl_cert_file           => '/etc/ssl/certs/ssl-cert-snakeoil.pem',
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
     sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => ['logstash.elasticdb.org',
-                                'nodepool.elasticdb.org',
-    ],
+    zmq_event_receivers     => [],
   }
 }
 
@@ -460,6 +459,7 @@ node 'zuul.elasticdb.org' {
     sysadmins                      => hiera('sysadmins', []),
     statsd_host                    => 'graphite.elasticdb.org',
     gearman_workers                => [
+      'jenkins01.elasticdb.org',
     ],
   }
 }
