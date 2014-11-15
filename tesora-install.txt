@@ -187,3 +187,22 @@ create and attach data volume to gerrit,
    sudo run the guts of mount_volume.sh, but /dev/sdb and /home/gerrit2
    I touch /home/gerrit/testfile, rebooted just to make sure it stuck
 
+DEV='/dev/vdb'
+DIR='/home/gerrit2'
+if ! blkid | grep $DEV | grep ext4 ; then
+    mkfs.ext4 ${DEV}
+fi
+perl -nle "m,${DEV}, || print" -i /etc/fstab
+if [ ! -d ${DIR} ] ; then
+    mkdir -p ${DIR}
+fi
+echo "${DEV}  ${DIR}  ext4  errors=remount-ro,barrier=0  0  2" >> /etc/fstab
+mount -a
+
+
+
+
+
+
+
+
