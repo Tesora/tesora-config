@@ -91,7 +91,7 @@ class gerrit(
   $mysql_password,
   $war = '',
   $email_private_key = '',
-  $vhost_name = $::fqdn,
+  $vhost_name = $::clientcert,
   $canonicalweburl = "https://${::fqdn}/",
   $robots_txt_source = '', # If left empty, the gerrit default will be used.
   $serveradmin = "webmaster@${::fqdn}",

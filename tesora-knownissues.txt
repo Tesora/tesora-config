@@ -1,0 +1,5 @@
+- consider SSL certs review.elasticdb.org
+- clean all projects review projects
+- re-import tesora-trove, 
+- block access tesora-trove @ github to service account
+
