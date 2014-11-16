@@ -193,9 +193,9 @@ class tesora_cyclone::review (
     require => User['gerrit2'],
   }
 
-#BH:REMOVE_FOR_NOW  include bup
-#BH:REMOVE_FOR_NOW  bup::site { 'rs-ord':
-#BH:REMOVE_FOR_NOW    backup_user   => 'bup-review',
-#BH:REMOVE_FOR_NOW    backup_server => 'ci-backup-rs-ord.openstack.org',
-#BH:REMOVE_FOR_NOW  }
+  include bup
+  bup::site { '01':
+    backup_user   => 'bup-review',
+    backup_server => 'ci-backup-01.elasticdb.org',
+  }
 }
