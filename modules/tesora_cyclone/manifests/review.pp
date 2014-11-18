@@ -103,7 +103,7 @@ class tesora_cyclone::review (
     ssh_replication_rsa_pubkey_contents => $ssh_replication_rsa_pubkey_contents,
     ssh_welcome_rsa_key_contents        => $ssh_welcome_rsa_key_contents,
     ssh_welcome_rsa_pubkey_contents     => $ssh_welcome_rsa_pubkey_contents,
-    email                               => 'review@elasticdb.org',
+    email                               => 'root@review.elasticdb.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '150',
     container_heaplimit                 => '8g',
