@@ -45,7 +45,7 @@ class tesora_cyclone::jenkins (
 
   class { '::jenkins::master':
     vhost_name              => $vhost_name,
-    serveradmin             => 'webmaster@openstack.org',
+    serveradmin             => 'webmaster@elasticdb.org',
     logo                    => 'openstack.png',
     ssl_cert_file           => $prv_ssl_cert_file,
     ssl_key_file            => $prv_ssl_key_file,
