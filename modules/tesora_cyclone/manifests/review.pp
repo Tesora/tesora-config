@@ -143,13 +143,13 @@ class tesora_cyclone::review (
         replicatePermissions => false,
         mirror               => true,
     },
-    {
-      name                 => 'local',
-      url                  => 'file:///opt/lib/git/',
-      replicationDelay     => '1',
-      threads              => '4',
-      mirror               => true,
-    },
+#    {
+#      name                 => 'local',
+#      url                  => 'file:///opt/lib/git/',
+#      replicationDelay     => '1',
+#      threads              => '4',
+#      mirror               => true,
+#    },
     ],
     require                             => $::project_config::config_dir,
   }
