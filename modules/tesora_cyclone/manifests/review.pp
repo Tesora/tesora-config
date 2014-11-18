@@ -36,6 +36,9 @@ class tesora_cyclone::review (
   # details here.
   $github_project_username = '',
   $github_project_password = '',
+
+  $vhost_name = '',
+
   # Create arbitrary values and put here, puppet will use during
   # provisioning.
   $mysql_host = '',

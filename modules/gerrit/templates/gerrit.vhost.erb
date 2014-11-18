@@ -7,13 +7,13 @@
 
   CustomLog ${APACHE_LOG_DIR}/gerrit-access.log combined
 
-  Redirect / https://<%= scope.lookupvar("gerrit::vhost_name") %>/
+  Redirect / https://review.elasticdb.org/
 
 </VirtualHost>
 
 <IfModule mod_ssl.c>
 <VirtualHost _default_:443>
-  ServerName <%= scope.lookupvar("gerrit::vhost_name") %>
+  ServerName review.elasticdb.org
   ServerAdmin <%= scope.lookupvar("gerrit::serveradmin") %>
   AllowEncodedSlashes NoDecode
 
@@ -45,8 +45,8 @@
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
   RewriteEngine on
-  RewriteCond %{HTTP_HOST} !<%= scope.lookupvar("gerrit::vhost_name") %>
-  RewriteRule ^.*$ <%= scope.lookupvar("gerrit::canonicalweburl") %>
+  RewriteCond %{HTTP_HOST} !review.elasticdb.org
+  RewriteRule ^.*$ review.elasticdb.org
 <% if scope.lookupvar("gerrit::replicate_local") -%>
   RewriteCond %{REQUEST_URI} !^/p/
 <% end -%>
