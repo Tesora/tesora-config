@@ -29,6 +29,7 @@ node default {
 node 'review.elasticdb.org' {
   class { 'tesora_cyclone::review':
     project_config_repo                 => 'https://github.com/Tesora/tesora-project-config',
+    vhost_name                          => 'review.elasticdb.org',
     github_oauth_token                  => hiera('gerrit_github_token', 'XXX'),
     github_project_username             => hiera('github_project_username', 'username'),
     github_project_password             => hiera('github_project_password', 'XXX'),
