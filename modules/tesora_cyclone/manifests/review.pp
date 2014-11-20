@@ -141,7 +141,7 @@ class tesora_cyclone::review (
     {
         name                 => 'github',
         url                  => 'git@github.com:',
-        authGroup            => 'Anonymous Users',
+        authGroup            => 'Tesora Developers',
         replicationDelay     => '1',
         replicatePermissions => false,
         mirror               => true,
