@@ -137,6 +137,8 @@ class tesora_cyclone::review (
     sysadmins                           => $sysadmins,
 #BH:REMOVE    swift_username                      => $swift_username,
 #BH:REMOVE    swift_password                      => $swift_password,
+
+    # see; https://review.typo3.org/plugins/replication/Documentation/config.html
     replication                         => [
     {
         name                 => 'github',
@@ -145,7 +147,9 @@ class tesora_cyclone::review (
         replicationDelay     => '1',
         replicatePermissions => false,
         mirror               => true,
+        push                 => 'refs/heads/master:refs/heads/master',
     },
+# BH:Local replica disabled. afaik, allows separate serving via apache/passenger
 #    {
 #      name                 => 'local',
 #      url                  => 'file:///opt/lib/git/',

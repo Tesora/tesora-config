@@ -19,5 +19,7 @@
 <% if replication['mirror'] != nil -%>
 	mirror = <%= replication['mirror'] %>
 <% end -%>
-        push = refs/heads/master:refs/heads/master
+<% if replication['push'] != nil -%>
+	push = <%= replication['push'] %>
+<% end -%>
 <% end -%>
