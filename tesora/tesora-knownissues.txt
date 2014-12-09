@@ -3,3 +3,6 @@
 - re-import tesora-trove, 
 - block access tesora-trove @ github to service account
 
+- UFW/iptables not quite right on many hosts.  
+- dhcp options for elasticdb.org don't seem to be sticking
+- ci-backup/backup may not be working
