@@ -165,17 +165,18 @@ class tesora_cyclone::review (
     version => 'e00d5af',
   }
 
-#BH:REMOVE  class { 'gerritbot':
-#BH:REMOVE    nick                    => 'openstackgerrit',
-#BH:REMOVE    password                => $gerritbot_password,
-#BH:REMOVE    server                  => 'irc.freenode.net',
-#BH:REMOVE    user                    => 'gerritbot',
-#BH:REMOVE    vhost_name              => $::fqdn,
-#BH:REMOVE    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
-#BH:REMOVE    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
-#BH:REMOVE    channel_file            => $::project_config::gerritbot_channel_file,
-#BH:REMOVE    require                 => $::project_config::config_dir,
-#BH:REMOVE  }
+  class { 'gerritbot':
+    nick                    => 'tesoragerrit',
+    password                => $gerritbot_password,
+    server                  => 'irc.freenode.net',
+    user                    => 'tesoragerrit',
+    vhost_name              => $::fqdn,
+    ssh_rsa_key_contents    => $gerritbot_ssh_rsa_key_contents,
+    ssh_rsa_pubkey_contents => $gerritbot_ssh_rsa_pubkey_contents,
+    channel_file            => $::project_config::gerritbot_channel_file,
+    require                 => $::project_config::config_dir,
+  }
+
   class { 'gerrit::remotes':
     ensure => absent,
   }
