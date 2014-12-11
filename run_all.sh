@@ -15,7 +15,7 @@
 # under the License.
 
 cd /opt/config/production
-#git fetch -a && git reset -q --hard @{u}
+git fetch -a && git reset -q --hard @{u}
 ./install_modules.sh >> /dev/null 2>&1
 
 # One must touch manifests/site.pp to trick puppet into re-loading modules
