@@ -47,7 +47,7 @@ class tesora_cyclone::static (
   ###########################################################
   # Tarballs
 
-  apache::vhost { 'tarballs.openstack.org':
+  apache::vhost { 'tarballs.elasticdb.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/tarballs',
@@ -64,7 +64,7 @@ class tesora_cyclone::static (
   ###########################################################
   # CI
 
-  apache::vhost { 'ci.openstack.org':
+  apache::vhost { 'ci.elasticdb.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/ci',
@@ -81,7 +81,7 @@ class tesora_cyclone::static (
   ###########################################################
   # Logs
 
-  apache::vhost { 'logs.openstack.org':
+  apache::vhost { 'logs.elasticdb.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/logs',
@@ -89,7 +89,7 @@ class tesora_cyclone::static (
     template => 'tesora_cyclone/logs.vhost.erb',
   }
 
-  apache::vhost { 'logs-dev.openstack.org':
+  apache::vhost { 'logs-dev.elasticdb.org':
     port     => 80,
     priority => '51',
     docroot  => '/srv/static/logs',
@@ -184,7 +184,7 @@ class tesora_cyclone::static (
   ###########################################################
   # Docs-draft
 
-  apache::vhost { 'docs-draft.openstack.org':
+  apache::vhost { 'docs-draft.elasticdb.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/docs-draft',
@@ -207,9 +207,10 @@ class tesora_cyclone::static (
     require => File['/srv/static/docs-draft'],
   }
 
-  class { 'tesora_cyclone::pypi_mirror':
-    vhost_name => 'pypi.openstack.org',
-  }
+# BH: don't [yet] want the space the pypi mirror takes.
+#  class { 'tesora_cyclone::pypi_mirror':
+#    vhost_name => 'pypi.elasticdb.org',
+#  }
 
   # Legacy pypi mirror
   file { '/srv/static/mirror/web/openstack':
@@ -220,7 +221,7 @@ class tesora_cyclone::static (
   ###########################################################
   # Specs
 
-  apache::vhost { 'specs.openstack.org':
+  apache::vhost { 'specs.elasticdb.org':
     port     => 80,
     priority => '50',
     docroot  => '/srv/static/specs',

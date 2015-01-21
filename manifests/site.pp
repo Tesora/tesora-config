@@ -554,6 +554,36 @@ node /^ci-backup-.*\.elasticdb\.org$/ {
   include tesora_cyclone::backup_server
 }
 
+# Node-OS: centos6
+node /^centos6\-?\d+\.slave\.elasticdb\.org$/ {
+  class {'tesora_cyclone::slave':
+    ssh_key => '',
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
+node /^precise\-?\d+\.slave\.elasticdb\.org$/ {
+  class {'tesora_cyclone::slave':
+    ssh_key => '',
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
+node /^trusty\-?\d+\.slave\.elasticdb\.org$/ {
+  class {'tesora_cyclone::slave':
+    ssh_key => '',
+    sysadmins => hiera('sysadmins', []),
+  }
+}
+
+node /^precise\-python3\-?\d+\.slave\.elasticdb\.org$/ {
+  class {'tesora_cyclone::slave':
+    ssh_key => '',
+    sysadmins => hiera('sysadmins', []),
+    python3 => true,
+  }
+}
+
 # Node-OS: precise
 node 'proposal.slave.elasticdb.org' {
   include tesora_cyclone
