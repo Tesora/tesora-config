@@ -5,7 +5,7 @@
 class tesora_cyclone::slave_common(
   $include_pypy = false,
   $sudo         = false,
-  $project_config_repo = 'https://git.openstack.org/openstack-infra/project-config',
+  $project_config_repo = 'https://github.com/Tesora/tesora-project-config',
 ){
   vcsrepo { '/opt/requirements':
     ensure   => latest,
