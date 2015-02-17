@@ -94,11 +94,13 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
         ssh_client.ssh('bash -x mount_volume.sh')
 
     # BH: Life seems better with this faked FQDN.  It's not real.
-    ssh_client.ssh('echo "10.240.28.27  ci-puppetmaster.openstacklocal" >> /etc/hosts')
-    ssh_client.ssh('echo "%s" > /etc/hostname && service hostname restart' % name)
-    # BH: workaround for failure of recursive create in zuul /var/www/recheckwatch
+    ssh_client.ssh('echo "10.240.28.27  ci-puppetmaster.openstacklocal" \
+                   >> /etc/hosts')
+    ssh_client.ssh('echo "%s" > /etc/hostname && service hostname restart' %
+                   name)
+    # BH: this should be in the puppet:
     ssh_client.ssh('mkdir /var/www')
-    
+
     ssh_client.scp(os.path.join(SCRIPT_DIR, '..', 'install_puppet.sh'),
                    'install_puppet.sh')
     # install correct puppet
@@ -142,7 +144,7 @@ def build_server(
     server = None
 
     # BH: HARDCODE
-    nics = [ { 'net-id': u'b25625cc-2f6b-48c2-b740-08e2b0503a19' } ]
+    nics = [{'net-id': u'b25625cc-2f6b-48c2-b740-08e2b0503a19'}]
     create_kwargs = dict(image=image, flavor=flavor, name=name, nics=nics)
 
     key_name = 'launch-%i' % (time.time())
