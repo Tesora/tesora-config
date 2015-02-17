@@ -428,15 +428,9 @@ node 'nodepool.elasticdb.org' {
     jenkins_api_user         => hiera('jenkins_api_user', 'username'),
     jenkins_api_key          => hiera('jenkins_api_key', 'XXX'),
     jenkins_credentials_id   => hiera('jenkins_credentials_id', 'XXX'),
-    rackspace_username       => hiera('nodepool_rackspace_username', 'username'),
-    rackspace_password       => hiera('nodepool_rackspace_password', 'XXX'),
-    rackspace_project        => hiera('nodepool_rackspace_project', 'project'),
-    hpcloud_username         => hiera('nodepool_hpcloud_username', 'username'),
-    hpcloud_password         => hiera('nodepool_hpcloud_password', 'XXX'),
-    hpcloud_project          => hiera('nodepool_hpcloud_project', 'project'),
-    tripleo_username         => hiera('nodepool_tripleo_username', 'username'),
-    tripleo_password         => hiera('nodepool_tripleo_password', 'XXX'),
-    tripleo_project          => hiera('nodepool_tripleo_project', 'project'),
+    bluebox_username         => hiera('nodepool_bluebox_username', 'username'),
+    bluebox_password         => hiera('nodepool_bluebox_password', 'XXX'),
+    bluebox_project          => hiera('nodepool_bluebox_project', 'project'),
   }
 }
 
