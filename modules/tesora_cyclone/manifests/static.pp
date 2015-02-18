@@ -207,10 +207,9 @@ class tesora_cyclone::static (
     require => File['/srv/static/docs-draft'],
   }
 
-# BH: don't [yet] want the space the pypi mirror takes.
-#  class { 'tesora_cyclone::pypi_mirror':
-#    vhost_name => 'pypi.elasticdb.org',
-#  }
+  class { 'tesora_cyclone::pypi_mirror':
+    vhost_name => 'pypi.elasticdb.org',
+  }
 
   # Legacy pypi mirror
   file { '/srv/static/mirror/web/openstack':
