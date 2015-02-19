@@ -147,7 +147,7 @@ class tesora_cyclone::review (
         replicationDelay     => '1',
         replicatePermissions => false,
         mirror               => true,
-        push                 => 'refs/heads/master:refs/heads/master',
+        push                 => '+refs/heads/master:refs/heads/master',
     },
 # BH:Local replica disabled. afaik, allows separate serving via apache/passenger
 #    {
