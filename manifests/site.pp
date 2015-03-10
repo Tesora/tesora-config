@@ -319,16 +319,10 @@ node 'git.elasticdb.org' {
     balancer_member_names   => [
       'git01.elasticdb.org',
       'git02.elasticdb.org',
-      'git03.elasticdb.org',
-      'git04.elasticdb.org',
-      'git05.elasticdb.org',
     ],
     balancer_member_ips     => [
-      '198.61.223.164',
-      '23.253.102.209',
-      '162.242.144.38',
-      '166.78.46.164',
-      '166.78.46.121',
+      '10.240.28.4',
+      '10.240.28.48',
     ],
   }
 }
@@ -336,7 +330,7 @@ node 'git.elasticdb.org' {
 # CentOS machines to run cgit and git daemon. Will be
 # load balanced by git.elasticdb.org.
 # Node-OS: centos6
-node /^git\d+\.openstack\.org$/ {
+node /^git\d+\.elasticdb\.org$/ {
   include tesora_cyclone
   class { 'tesora_cyclone::git_backend':
     project_config_repo     => 'https://github.com/Tesora/tesora-project-config',

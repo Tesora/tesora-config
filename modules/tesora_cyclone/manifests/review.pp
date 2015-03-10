@@ -141,22 +141,35 @@ class tesora_cyclone::review (
     # see; https://review.typo3.org/plugins/replication/Documentation/config.html
     replication                         => [
     {
-        name                 => 'github',
-        url                  => 'git@github.com:',
-        authGroup            => 'Tesora Developers',
-        replicationDelay     => '1',
-        replicatePermissions => false,
-        mirror               => true,
-        push                 => '+refs/heads/master:refs/heads/master',
+      name                 => 'github',
+      url                  => 'git@github.com:',
+      authGroup            => 'Tesora Developers',
+      replicationDelay     => '1',
+      replicatePermissions => false,
+      mirror               => true,
+      push                 => '+refs/heads/master:refs/heads/master',
     },
-# BH:Local replica disabled. afaik, allows separate serving via apache/passenger
-#    {
-#      name                 => 'local',
-#      url                  => 'file:///opt/lib/git/',
-#      replicationDelay     => '1',
-#      threads              => '4',
-#      mirror               => true,
-#    },
+    {
+      name                 => 'local',
+      url                  => 'file:///opt/lib/git/',
+      replicationDelay     => '1',
+      threads              => '4',
+      mirror               => true,
+    },
+    {
+      name                 => 'git01',
+      url                  => 'cgit@git01.elasticdb.org:/var/lib/git/',
+      replicationDelay     => '1',
+      threads              => '4',
+      mirror               => true,
+    },
+    {
+      name                 => 'git02',
+      url                  => 'cgit@git02.elasticdb.org:/var/lib/git/',
+      replicationDelay     => '1',
+      threads              => '4',
+      mirror               => true,
+    },
     ],
     require                             => $::project_config::config_dir,
   }
