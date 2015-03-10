@@ -89,17 +89,7 @@ def get_flavor(client, min_ram):
 
 
 def get_public_ip(server, version=4):
-    if 'os-floating-ips' in get_extensions(server.manager.api):
-        for addr in server.manager.api.floating_ips.list():
-            if addr.instance_id == server.id:
-                return addr.ip
-        # We don't have one - so add one please
-        # BH:HARDCODE
-        new_ip = server.manager.api.floating_ips.create('external')
-        server.add_floating_ip(new_ip)
-        for addr in server.manager.api.floating_ips.list():
-            if addr.instance_id == server.id:
-                return addr.ip
+    # BH: removed FIP method, left RS&HP, but we only use Bluebox codepath
     for addr in server.addresses.get('public', []):
         if type(addr) == type(u''):  # Rackspace/openstack 1.0
             return addr
@@ -108,6 +98,10 @@ def get_public_ip(server, version=4):
     for addr in server.addresses.get('private', []):
         # HP Cloud
         if addr['version'] == version and not addr['addr'].startswith('10.'):
+            return addr['addr']
+    for addr in server.addresses.get('internal', []):
+        # Bluebox cloud internal
+        if addr['version'] == version and addr['addr'].startswith('10.'):
             return addr['addr']
     return None
 
