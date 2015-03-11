@@ -109,7 +109,7 @@ class tesora_cyclone::review (
     email                               => 'root@review.elasticdb.org',
       # 1 + 100 + 9 + 2 + 2 + 25 => 139(rounded up)
     database_poollimit                  => '150',
-    container_heaplimit                 => '8g',
+    container_heaplimit                 => '4g',
     core_packedgitopenfiles             => '4096',
     core_packedgitlimit                 => '400m',
     core_packedgitwindowsize            => '16k',
@@ -145,9 +145,11 @@ class tesora_cyclone::review (
       url                  => 'git@github.com:',
       authGroup            => 'Tesora Developers',
       replicationDelay     => '1',
-      replicatePermissions => false,
-      mirror               => true,
+      replicatePermissions => true,
+      mirror               => false,
       push                 => '+refs/heads/master:refs/heads/master',
+      push                 => '+refs/changes/*:refs/changes/*',
+      push                 => '+refs/meta/config:refs/meta/config',
     },
     {
       name                 => 'local',
