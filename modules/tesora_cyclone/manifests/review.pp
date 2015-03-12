@@ -147,9 +147,11 @@ class tesora_cyclone::review (
       replicationDelay     => '1',
       replicatePermissions => true,
       mirror               => false,
-      push                 => '+refs/heads/master:refs/heads/master',
-      push                 => '+refs/changes/*:refs/changes/*',
-      push                 => '+refs/meta/config:refs/meta/config',
+      push                 => [
+          '+refs/heads/master:refs/heads/master',
+          '+refs/changes/*:refs/changes/*',
+          '+refs/meta/config:refs/meta/config',
+      ]
     },
     {
       name                 => 'local',

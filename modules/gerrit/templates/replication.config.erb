@@ -20,6 +20,8 @@
 	mirror = <%= replication['mirror'] %>
 <% end -%>
 <% if replication['push'] != nil -%>
-	push = <%= replication['push'] %>
+        <% @replication.push do |push| -%>
+	push = <%= push %>
+        <% end -%>
 <% end -%>
 <% end -%>
