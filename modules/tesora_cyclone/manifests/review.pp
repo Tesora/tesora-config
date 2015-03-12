@@ -167,13 +167,6 @@ class tesora_cyclone::review (
       threads              => '4',
       mirror               => true,
     },
-    {
-      name                 => 'git02',
-      url                  => 'cgit@git02.elasticdb.org:/var/lib/git/',
-      replicationDelay     => '1',
-      threads              => '4',
-      mirror               => true,
-    },
     ],
     require                             => $::project_config::config_dir,
   }
