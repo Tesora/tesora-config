@@ -85,6 +85,26 @@ class tesora_cyclone::review (
   $project_config_repo = '',
 ) {
 
+  class {'mysql::server':
+    config_hash    =>  {
+      'root_password'  => $mysql_password,
+      'bind_address'   => '127.0.0.1',
+    },
+  }
+
+  include mysql::server::account_security
+
+  mysql::db { 'reviewdb':
+    user     => 'gerrit2',
+    password => $mysql_password,
+    host     => 'localhost',
+    grant    => ['all'],
+    require  => [
+      Class['mysql::server'],
+      Class['mysql::server::account_security'],
+    ],
+  }
+
   class { 'project_config':
     url  => $project_config_repo,
   }
