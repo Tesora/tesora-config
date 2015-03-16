@@ -85,6 +85,23 @@ class tesora_cyclone::review (
   $project_config_repo = '',
 ) {
 
+  class {'mysql::server':
+    config_hash    =>  {
+      'root_password'  => $mysql_password,
+      'bind_address'   => '127.0.0.1',
+    },
+  }
+
+  mysql::db { 'reviewdb':
+    user     => 'gerrit2',
+    password => $mysql_password,
+    host     => 'localhost',
+    grant    => ['all'],
+    require  => [
+      Class['mysql::server'],
+    ],
+  }
+
   class { 'project_config':
     url  => $project_config_repo,
   }
@@ -212,7 +229,7 @@ class tesora_cyclone::review (
   }
 
   include bup
-  bup::site { '01':
+  bup::site { 'bluebox':
     backup_user   => 'bup-review',
     backup_server => 'ci-backup-01.elasticdb.org',
   }
