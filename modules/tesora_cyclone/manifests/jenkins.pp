@@ -28,6 +28,12 @@ class tesora_cyclone::jenkins (
     sysadmins                 => $sysadmins,
   }
 
+  include bup
+  bup::site { 'bluebox':
+    backup_user   => 'bup-jenkins',
+    backup_server => 'ci-backup-01.elasticdb.org',
+  }
+
   # Set defaults here because they evaluate variables which you cannot
   # do in the class parameter list.
   if $ssl_cert_file == '' {
