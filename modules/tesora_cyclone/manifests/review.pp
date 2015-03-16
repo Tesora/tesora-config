@@ -212,7 +212,7 @@ class tesora_cyclone::review (
   }
 
   include bup
-  bup::site { '01':
+  bup::site { 'bluebox':
     backup_user   => 'bup-review',
     backup_server => 'ci-backup-01.elasticdb.org',
   }
