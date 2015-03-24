@@ -22,6 +22,12 @@ class tesora_cyclone::nodepool_prod(
     iptables_public_tcp_ports => [80],
   }
 
+  include bup
+  bup::site { 'bluebox':
+    backup_user   => 'bup-nodepool',
+    backup_server => 'ci-backup-01.elasticdb.org',
+  }
+
   class { 'project_config':
     url  => $project_config_repo,
   }

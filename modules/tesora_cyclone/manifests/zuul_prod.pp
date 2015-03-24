@@ -32,6 +32,12 @@ class tesora_cyclone::zuul_prod(
     sysadmins                 => $sysadmins,
   }
 
+  include bup
+  bup::site { 'bluebox':
+    backup_user   => 'bup-zuul',
+    backup_server => 'ci-backup-01.elasticdb.org',
+  }
+
   class { 'project_config':
     url  => $project_config_repo,
   }
