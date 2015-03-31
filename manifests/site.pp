@@ -433,7 +433,7 @@ node 'zuul.elasticdb.org' {
   class { 'tesora_cyclone::zuul_prod':
     project_config_repo            => 'https://github.com/Tesora/tesora-project-config',
     gerrit_server                  => 'review.elasticdb.org',
-    gerrit_user                    => 'zuul',
+    gerrit_user                    => 'jenkins',
     gerrit_ssh_host_key            => hiera('gerrit_ssh_rsa_pubkey_contents', 'XXX'),
     zuul_ssh_private_key           => hiera('zuul_ssh_private_key_contents', 'XXX'),
     url_pattern                    => 'http://logs.elasticdb.org/{build.parameters[LOG_PATH]}',
