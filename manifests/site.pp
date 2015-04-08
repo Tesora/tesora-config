@@ -446,7 +446,7 @@ node 'zuul.elasticdb.org' {
     swift_default_logserver_prefix => 'http://logs.elasticdb.org/',
     zuul_url                       => 'http://zuul.elasticdb.org/p',
     sysadmins                      => hiera('sysadmins', []),
-    statsd_host                    => 'graphite.elasticdb.org',
+#    statsd_host                    => 'graphite.elasticdb.org',
     gearman_workers                => [
       'jenkins01.elasticdb.org',
     ],
