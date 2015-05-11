@@ -166,6 +166,7 @@ class tesora_cyclone::review (
       mirror               => false,
       push                 => [
           '+refs/heads/master:refs/heads/master',
+          '+refs/heads/EE-1.4:refs/heads/EE-1.4',
           '+refs/changes/*:refs/changes/*',
           '+refs/meta/config:refs/meta/config',
       ]
