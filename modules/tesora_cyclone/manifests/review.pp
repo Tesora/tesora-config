@@ -166,10 +166,10 @@ class tesora_cyclone::review (
       mirror               => false,
       push                 => [
           '+refs/heads/master:refs/heads/master',
-          '+refs/heads/stable/EE-*:refs/heads/stable/EE-*',
-          '+refs/heads/stable/CE-*:refs/heads/stable/CE-*',
-          '+refs/heads/dev/EE-*:refs/heads/dev/EE-*',
-          '+refs/heads/dev/CE-*:refs/heads/dev/CE-*',
+          '+refs/heads/stable/EE*:refs/heads/stable/EE*',
+          '+refs/heads/stable/CE*:refs/heads/stable/CE*',
+          '+refs/heads/dev/EE*:refs/heads/dev/EE*',
+          '+refs/heads/dev/CE*:refs/heads/dev/CE*',
           '+refs/changes/*:refs/changes/*',
           '+refs/meta/config:refs/meta/config',
       ]
