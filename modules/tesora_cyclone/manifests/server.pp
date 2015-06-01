@@ -23,4 +23,5 @@ class tesora_cyclone::server (
   class { 'exim':
     sysadmins => $sysadmins,
   }
+  class { 'tesora_cyclone::hosts': }
 }
