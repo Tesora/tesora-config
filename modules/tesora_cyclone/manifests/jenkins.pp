@@ -3,7 +3,7 @@
 class tesora_cyclone::jenkins (
   $vhost_name = $::fqdn,
   $jenkins_jobs_password = '',
-  $jenkins_jobs_username = 'gerrit',
+  $jenkins_jobs_username = 'gerrit@tesora.com',
   $jenkins_git_url = 'https://git.openstack.org/openstack-infra/jenkins-job-builder',
   $jenkins_git_revision = 'master',
   $manage_jenkins_jobs = true,
