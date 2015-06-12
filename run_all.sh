@@ -24,3 +24,5 @@ touch manifests/site.pp
 
 # Run this as an external script so that the above pull will get new changes
 ansible-playbook /etc/ansible/remote_puppet.yaml >> /var/log/puppet_run_all.log 2>&1
+
+echo "completed ansible run at $(date '+%D %T') with exit code $?" >> /var/log/puppet_run_all.log
