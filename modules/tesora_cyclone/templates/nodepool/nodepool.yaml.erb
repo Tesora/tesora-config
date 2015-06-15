@@ -16,33 +16,16 @@ gearman-servers:
   - host: zuul.elasticdb.org
 
 labels:
-#  - name: devstack-precise
-#    image: devstack-precise
-#    ready-script: configure_mirror.sh
-#    min-ready: 1
-#    providers:
-#      - name: bluebox
-#  - name: devstack-precise-check
-#    image: devstack-precise-check
-#    min-ready: 0
-#    providers:
-#      - name: bluebox
-#  - name: bare-precise
-#    image: bare-precise
-#    ready-script: configure_mirror.sh
-#    min-ready: 1
-#    providers:
-#      - name: bluebox
   - name: devstack-trusty
     image: devstack-trusty
     ready-script: configure_mirror.sh
-    min-ready: 4
+    min-ready: 1
     providers:
       - name: bluebox
   - name: bare-trusty
     image: bare-trusty
     ready-script: configure_mirror.sh
-    min-ready: 2
+    min-ready: 1
     providers:
       - name: bluebox
   - name: bare-precise
@@ -54,13 +37,13 @@ labels:
   - name: bare-centos6
     image: bare-centos6
     ready-script: configure_mirror.sh
-    min-ready: -1 
+    min-ready: 1
     providers:
       - name: bluebox
   - name: py3k-precise
     image: py3k-precise
     ready-script: configure_mirror.sh
-    min-ready: 1
+    min-ready: 0
     providers:
       - name: bluebox
 
@@ -74,88 +57,47 @@ providers:
     project-id: '<%= bluebox_project %>'
     auth-url: 'https://tesora-iad.openstack.blueboxgrid.com:5001/v2.0'
     boot-timeout: 180
-    max-servers: 10
+    max-servers: 5
     rate: 0.5
+    pool: 'external'
     networks:
       - net-label: 'internal'
     images:
-#      - name: devstack-precise
-#        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_devstack.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
-#      - name: bare-precise
-#        base-image: 'Ubuntu 12.04 LTS (Precise Pangolin)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_bare.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
       - name: devstack-trusty
-        base-image: 'ubuntu-14.04'
+        base-image: 'ubuntu-14.04.2'
         min-ram: 8192
-        name-filter: 'm1.large'
+        name-filter: 'dsvm-minimal'
         setup: prepare_node_devstack.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-trusty
-        base-image: 'ubuntu-14.04'
+        base-image: 'ubuntu-14.04.2'
         min-ram: 8192
-        name-filter: 'm1.large'
+        name-filter: 'nodepool-standard'
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-precise
-        base-image: 'ubuntu-12.04'
+        base-image: 'ubuntu-12.04.5-20150204release'
         min-ram: 8192
-        name-filter: 'm1.large'
+        name-filter: 'nodepool-standard'
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: bare-centos6
-        base-image: 'centos-6.5-ci-!requiretty'
+        base-image: 'centos-6.5-20141129'
         min-ram: 8192
-        name-filter: 'm1.large'
+        name-filter: 'nodepool-standard'
         setup: prepare_node_bare.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
       - name: py3k-precise
-        base-image: 'ubuntu-12.04'
+        base-image: 'ubuntu-12.04.5-20150204release'
         min-ram: 8192
-        name-filter: 'm1.large'
+        name-filter: 'nodepool-standard'
         setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
-#      - name: devstack-f20
-#        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_devstack.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
-#      - name: bare-f20
-#        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_bare.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
-#      - name: devstack-f20-virt-preview
-#        base-image: 'Fedora 20 (Heisenbug) (PVHVM)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_devstack_virt_preview.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
-#      - name: devstack-centos7
-#        base-image: 'CentOS 7 (PVHVM)'
-#        min-ram: 8192
-#        name-filter: 'Performance'
-#        setup: prepare_node_devstack.sh
-#        username: jenkins
-#        private-key: /home/nodepool/.ssh/id_rsa
 
 targets:
   - name: jenkins01
