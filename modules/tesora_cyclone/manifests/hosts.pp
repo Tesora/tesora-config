@@ -16,6 +16,10 @@ class tesora_cyclone::hosts (
     ip => '10.240.28.32',
   }
 
+  host { 'nodepool.elasticdb.org':
+    ip => '10.240.28.74',
+  }
+
   host { 'ci-backup-01.elasticdb.org':
     ip => '10.240.28.14',
   }
