@@ -16,7 +16,7 @@ class tesora_cyclone::nodepool_prod(
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
   $project_config_repo = '',
-  $git_source_repo = 'https://github.com/tesora/nodepool',
+  $git_source_repo = 'https://github.com/tesora/tesora-nodepool',
 ) {
   class { 'tesora_cyclone::server':
     sysadmins                 => $sysadmins,
