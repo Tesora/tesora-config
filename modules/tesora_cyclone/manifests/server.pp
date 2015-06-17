@@ -24,4 +24,7 @@ class tesora_cyclone::server (
     sysadmins => $sysadmins,
   }
   class { 'tesora_cyclone::hosts': }
+  class { 'nrpe': 
+    allowed_hosts => ['127.0.0.1', $::ipaddress ,'10.240.28.17'],
+  }
 }
