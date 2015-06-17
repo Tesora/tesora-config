@@ -40,12 +40,6 @@ labels:
     min-ready: 1
     providers:
       - name: bluebox
-  - name: py3k-precise
-    image: py3k-precise
-    ready-script: configure_mirror.sh
-    min-ready: 0
-    providers:
-      - name: bluebox
 
 providers:
   - name: bluebox
@@ -89,13 +83,6 @@ providers:
         min-ram: 8192
         name-filter: 'nodepool-standard'
         setup: prepare_node_bare.sh
-        username: jenkins
-        private-key: /home/nodepool/.ssh/id_rsa
-      - name: py3k-precise
-        base-image: 'ubuntu-12.04.5-20150204release'
-        min-ram: 8192
-        name-filter: 'nodepool-standard'
-        setup: prepare_node_py3k.sh
         username: jenkins
         private-key: /home/nodepool/.ssh/id_rsa
 
