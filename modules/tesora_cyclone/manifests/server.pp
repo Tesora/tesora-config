@@ -24,4 +24,5 @@ class tesora_cyclone::server (
     sysadmins => $sysadmins,
   }
   class { 'tesora_cyclone::hosts': }
+  class { 'nrpe': }
 }
