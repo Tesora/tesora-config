@@ -105,14 +105,18 @@ class tesora_cyclone::base(
     ensure  => absent,
     user    => 'root',
   }
-
   ssh_authorized_key { 'puppet-remote-2014-09-15':
+    ensure  => absent,
+    user    => 'root',
+  }
+
+  ssh_authorized_key { 'TESORA-puppet-remote-20015-06-17':
     ensure  => present,
     user    => 'root',
     type    => 'ssh-rsa',
-    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDSLlN41ftgxkNeUi/kATYPwMPjJdMaSbgokSb9PSkRPZE7GeNai60BCfhu+ky8h5eMe70Bpwb7mQ7GAtHGXPNU1SRBPhMuVN9EYrQbt5KSiwuiTXtQHsWyYrSKtB+XGbl2PhpMQ/TPVtFoL5usxu/MYaakVkCEbt5IbPYNg88/NKPixicJuhi0qsd+l1X1zoc1+Fn87PlwMoIgfLIktwaL8hw9mzqr+pPcDIjCFQQWnjqJVEObOcMstBT20XwKj/ymiH+6p123nnlIHilACJzXhmIZIZO+EGkNF7KyXpcBSfv9efPI+VCE2TOv/scJFdEHtDFkl2kdUBYPC0wQ92rp',
+    key     => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCtVaFpO7RtFy8mQ+gIlpJR1d4DnDm7oJCGTdTgASKa/ILWj4bvZxT14tff6n2HNYtcYjz14N4VNK4+Jw1Q0q9az1T8BZ4GjDVap5IRNrniprVnOFsmutMNzqWNjQ8UgdGAYr1z7rUtQnGdN8niyj/4RyCyoPv8f6aT68B7lYm4lGuWR0ioxsEg6owCQ0C3pg3zs+JqyVdKxSB8BuNBq88gZq5uikJLjKrKrhbHL/M838Zff6VC0DOOgHNyqbwqxHtKf1nkt/KTGx4H9WC/PAu0KZm6xd2GqvYRmTPws9bloWU+gJCwPQPBsSuISwNd3eg2JUGzUB65nQCosoAq+3lT',
     options => [
-      'from="puppetmaster.openstack.org"',
+      'from="ci-puppetmaster"',
     ],
     require => File['/root/.ssh'],
   }
