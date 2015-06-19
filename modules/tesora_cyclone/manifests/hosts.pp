@@ -28,10 +28,6 @@ class tesora_cyclone::hosts (
     ip => '10.240.28.44',
   }
 
-  host { 'git01.elasticdb.org':
-    ip => '10.240.28.4',
-  }
-
   host { 'ci-puppetmaster.openstacklocal':
     ip => '10.240.28.27',
   }

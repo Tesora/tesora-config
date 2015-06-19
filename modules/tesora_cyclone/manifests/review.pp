@@ -179,13 +179,13 @@ class tesora_cyclone::review (
       threads              => '4',
       mirror               => true,
     },
-    {
-      name                 => 'git01',
-      url                  => 'cgit@git01.elasticdb.org:/var/lib/git/',
-      replicationDelay     => '1',
-      threads              => '4',
-      mirror               => true,
-    },
+#    {
+#      name                 => 'git01',
+#      url                  => 'cgit@git01.elasticdb.org:/var/lib/git/',
+#      replicationDelay     => '1',
+#      threads              => '4',
+#      mirror               => true,
+#    },
     ],
     require                             => $::project_config::config_dir,
   }
