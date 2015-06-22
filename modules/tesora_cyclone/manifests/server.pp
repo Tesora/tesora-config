@@ -12,7 +12,7 @@ class tesora_cyclone::server (
   $ca_server                 = undef,
 ) {
   class { 'tesora_cyclone::template':
-    iptables_public_tcp_ports => $iptables_public_tcp_ports,
+    iptables_public_tcp_ports => concat($iptables_public_tcp_ports, [5666]),
     iptables_public_udp_ports => $iptables_public_udp_ports,
     iptables_rules4           => $iptables_rules4,
     iptables_rules6           => $iptables_rules6,
