@@ -24,7 +24,7 @@ class tesora_cyclone::template (
   }
 
   class { 'iptables':
-    public_tcp_ports => $iptables_public_tcp_ports,
+    public_tcp_ports => concat($iptables_public_tcp_ports, [5666]),
     public_udp_ports => $iptables_public_udp_ports,
     rules4           => $iptables_rules4,
     rules6           => $iptables_rules6,
@@ -113,5 +113,11 @@ class tesora_cyclone::template (
     package { 'bind-utils':
       ensure => present,
     }
+  }
+
+  class { 'tesora_cyclone::hosts': }
+
+  class { 'nrpe':
+    allowed_hosts => ['127.0.0.1', $::ipaddress ,'10.240.28.17'],
   }
 }
