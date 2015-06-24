@@ -114,7 +114,7 @@ node /^jenkins\d+\.elasticdb\.org$/ {
     ssl_key_file            => '/etc/ssl/private/ssl-cert-snakeoil.key',
     ssl_chain_file          => '',
     sysadmins               => hiera('sysadmins', []),
-    zmq_event_receivers     => [],
+    zmq_event_receivers     => ['nodepool.elasticdb.org'],
   }
 }
 
@@ -449,6 +449,7 @@ node 'zuul.elasticdb.org' {
 #    statsd_host                    => 'graphite.elasticdb.org',
     gearman_workers                => [
       'jenkins01.elasticdb.org',
+      'nodepool.elasticdb.org',
     ],
   }
 }
