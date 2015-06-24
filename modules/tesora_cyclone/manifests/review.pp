@@ -170,6 +170,7 @@ class tesora_cyclone::review (
           '+refs/heads/dev/*:refs/heads/dev/*',
           '+refs/changes/*:refs/changes/*',
           '+refs/meta/config:refs/meta/config',
+          '+refs/tags/*:refs/tags/*',
       ]
     },
     {
