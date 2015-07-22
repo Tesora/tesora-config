@@ -60,7 +60,7 @@ class tesora_cyclone::base(
   }
 
   include pip
-  $desired_virtualenv = '1.11.4'
+  $desired_virtualenv = '13.1.0'
 
   if (( versioncmp($::virtualenv_version, $desired_virtualenv) < 0 )) {
     $virtualenv_ensure = $desired_virtualenv
