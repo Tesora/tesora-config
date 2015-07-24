@@ -13,7 +13,7 @@ class tesora_cyclone::hosts (
   }
 
   host { 'jenkins01.elasticdb.org':
-    ip => '10.240.28.32',
+    ip => '10.240.29.108',
   }
 
   host { 'nodepool.elasticdb.org':
