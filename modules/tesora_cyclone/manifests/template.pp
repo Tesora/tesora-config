@@ -51,6 +51,18 @@ class tesora_cyclone::template (
     ensure => present,
   }
 
+  package { 'rsyslog':
+    ensure => present,
+  }
+
+  package { 'git':
+    ensure => present,
+  }
+
+  package { 'rsync':
+    ensure => present,
+  }
+
   if ($enable_unbound) {
     class { 'unbound':
       install_resolv_conf => $install_resolv_conf

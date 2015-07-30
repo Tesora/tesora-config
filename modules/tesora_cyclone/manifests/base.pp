@@ -31,14 +31,6 @@ class tesora_cyclone::base(
     ensure => absent,
   }
 
-  package { 'popularity-contest':
-    ensure => absent,
-  }
-
-  package { 'git':
-    ensure => present,
-  }
-
   if ($::operatingsystem == 'Fedora') {
 
     package { 'hiera':
