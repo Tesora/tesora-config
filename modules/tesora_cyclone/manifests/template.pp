@@ -9,7 +9,7 @@ class tesora_cyclone::template (
   $iptables_rules6           = [],
   $pin_puppet                = '3.',
   $install_users             = true,
-  $install_resolv_conf       = false,
+  $install_resolv_conf       = true,
   $automatic_upgrades        = true,
   $certname                  = $::fqdn,
   $ca_server                 = undef,
@@ -73,11 +73,16 @@ class tesora_cyclone::template (
         'puppet:///modules/tesora_cyclone/rsyslog.d_50-default.conf',
       replace => true,
       notify  => $rsyslog_notify,
+      require => Package['rsyslog'],
     }
 
     # Ubuntu installs their whoopsie package by default, but it eats through
     # memory and we don't need it on servers
     package { 'whoopsie':
+      ensure => absent,
+    }
+
+    package { 'popularity-contest':
       ensure => absent,
     }
   }

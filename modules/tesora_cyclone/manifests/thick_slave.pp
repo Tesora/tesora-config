@@ -50,6 +50,9 @@ class tesora_cyclone::thick_slave(
     $::tesora_cyclone::jenkins_params::xslt_package, # for building openstack docs
     $::tesora_cyclone::jenkins_params::xvfb_package, # for selenium tests
     $::tesora_cyclone::jenkins_params::php5_cli_package, # for community portal build
+
+    $::tesora_cyclone::jenkins_params::uuid_dev, # for oslo.messaging pyngus/proton
+    $::tesora_cyclone::jenkins_params::swig, # for oslo.messaging pyngus/proton
   ]
 
   package { $packages:
