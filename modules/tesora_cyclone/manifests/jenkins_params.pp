@@ -87,6 +87,9 @@ class tesora_cyclone::jenkins_params {
         $cgred_require = Package['cgroups']
         $dvipng_package = 'dvipng'
       }
+
+      $uuid_dev = "libuuid-devel"
+      $swig = "swig"
     }
     'Debian': {
       # packages needed by slaves
@@ -163,6 +166,9 @@ class tesora_cyclone::jenkins_params {
         Package['cgroups'],
         File['/etc/init/cgred.conf'],
       ]
+
+      $uuid_dev = "uuid-dev"
+      $swig = "swig"
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} The 'jenkins' module only supports osfamily Debian or RedHat (slaves only).")
