@@ -3,7 +3,7 @@
 class tesora_cyclone::users {
   @user::virtual::localuser { 'andrew':
     realname => 'Andrew Bramley',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC2hUSOxfEEp8OiFoudNcSUgU8D0J+sEipQAHAzXn5VHkECyOkrfXwr2fIodIztmhNyimc0VVzKLJcY4f6HMBLMtgP5XVacN7QCHvemibNLcK0cmAzkQHDT105h6fpnYdT10Mn9g2yrubHcAd7+lF3owuQUNkE5CCSt/0/e2XlCLrreISzY/LzoMCjpeeWLtCFAaYaqfMNRURr4j0qE2rfcz1u/oU2Aa7xgoePegW/wtVCWpaOl0jGvo5Pkgn+bBOercxZKT92zIsfbthA4eHUjg9AhWRMipoVSvYn0iRpfoFPAHONImZu45SqCeu/+82FZXrDpOdLph9lqSRZhwb+N',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDjbp4bWniYVvYowg/CWZRHx2q0qIPdOWdpJp+xmPHSbLHBcTnmGzpZPlCL6RwQm0KsoXFq5fIdHXdw457zxFYlsEYs0xrahXfijWgAqrq4tT06z12qv5i/W+8GPb/5X8T+yiswHGTIAYKc0Z2U7GUD6/E++1oFkHwvbrbmbDEmccApcx+HPNx22CZHa+JG7uTY80HZK5ulEPFbGMokapk76Un+oSjF3E13sKKQUZR2cLo1vrDrvdlc3y03+JAsXZ5jWEBe7ZpXmnX7k5xBSvLX+JwuN00FKNyPKbawLsOeoPLuanSis4xlnc1S1/fIMa3iuHGtUbXPM7JXq3fEWhVeruiMPpoL/nKXEP9NY+prtRwXPA2PLFB/GRM0GoFZWSBPxhf5s4LgJh/cnSRMlrZyNvoo7y76aeUqxG+bvr4TwOvT6D1n9GFo4AjYfQ748TvmWDY3kGMx4012jLNGeAQ++ao56KRgf1tQ9i3BrDUsu+O63HKLYHZiI+XVGl1LTXJamD2haYz3v0jPpEAKAjfweCqtwMh+G1+1x0mB4Gr+GF5CD5tjDhRmuThThgkDQVFn75O+JBut3EnaNUckLSQjwrcuXVS8wqW27Zou6H01Jpkaw7mg/ez7F3b5AQmUfRcd4smBFM28ZMOZSR0E/3GUIRXRkNl87d0oTVV4iM+L/Q==',
     key_id   => 'andrew@tesora.com',
   }
 
