@@ -45,6 +45,23 @@ class tesora_cyclone::static (
   }
 
   ###########################################################
+  # Developer
+
+  apache::vhost { 'developer.elasticdb.org':
+    port     => 80,
+    priority => '50',
+    docroot  => '/srv/static/publish-docs',
+    require  => File['/srv/static/publish-docs'],
+  }
+
+  file { '/srv/static/publish-docs':
+    ensure  => directory,
+    owner   => 'jenkins',
+    group   => 'jenkins',
+    require => User['jenkins'],
+  }
+
+  ###########################################################
   # Tarballs
 
   apache::vhost { 'tarballs.elasticdb.org':
