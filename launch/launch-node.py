@@ -94,7 +94,7 @@ def bootstrap_server(server, admin_pass, key, cert, environment, name,
         ssh_client.ssh('bash -x mount_volume.sh')
 
     # BH: Life seems better with this faked FQDN.  It's not real.
-    ssh_client.ssh('echo "10.240.28.27  ci-puppetmaster.openstacklocal" \
+    ssh_client.ssh('echo "10.240.64.210  ci-puppetmaster.openstacklocal" \
                    >> /etc/hosts')
     ssh_client.ssh('echo "%s" > /etc/hostname && service hostname restart' %
                    name)
