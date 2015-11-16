@@ -53,8 +53,8 @@ class tesora_cyclone::thick_slave(
 
     $::tesora_cyclone::jenkins_params::uuid_dev, # for oslo.messaging pyngus/proton
     $::tesora_cyclone::jenkins_params::swig, # for oslo.messaging pyngus/proton
-    $::openstack_project::jenkins_params::libjpeg_dev, # for sphinx Pillow dep
-    $::openstack_project::jenkins_params::zlib_dev, # for sphinx Pillow dep
+    $::tesora_cyclone::jenkins_params::libjpeg_dev, # for sphinx Pillow dep
+    $::tesora_cyclone::jenkins_params::zlib_dev, # for sphinx Pillow dep
   ]
 
   package { $packages:
