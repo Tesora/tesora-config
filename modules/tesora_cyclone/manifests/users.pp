@@ -9,7 +9,7 @@ class tesora_cyclone::users {
 
   @user::virtual::localuser { 'amrith':
     realname => 'Amrith Kumar',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCmo4+INq4ocvY0yna3jd5jmqxBxLU8eF+V/dYPC7L4Ceu3TNEBIl/gKUNGJApmEH82+Luos0g6ViqA4DyCC2b90Daiagp3HEGIPZ13yNDLcxoFoXH8nSYpQMxmNfjbgOO3lSbz4ti+fBGeJW+jixfEqGOQwkijJo57vkvjohft2K0vvFqCK4iLrQazS1sr1Jtu+ULInSz9mt25Y1HMl0Xv/8C9hi4xStzxfi7290lnBFL+hm+YDfVS4dWvrk4VMcLT2CXom7Xq53Ft88+XPfSJPs6bZ4pW4BIeEPRKCqt1FKDoQrsjeE5DhAEDT4Ro4C3hT2dT51HwjL7+RGXXMdUr',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCxnJUutDKMEbJYuAPe/BA+0P3dvglUAIzKbMWpNcg++/G5iGwqkrXO6IXddCVvu5MTTd6T266XNL7EVIljc6ZE3FS8O4GCPUWqnnFf57+pXCMAmRTEo35ybuMXYfsdxhRArXm3rg4BSGX8QruW5Hai/Rn6yB10/aDsTGD+1DI2uZf3eGltFFIhTLj/sEYTsthNwkz4EXXPz46sBrITxEd3zDExxmI478dQq2FD1/EOo4MLW+1VRK4V5g7uaq3eHWmEEQRhdQQ6/lGd1x4zXXqHJQFRq2dGDazzJJ9cI4T3nWrCrveTM+pmv+uFIDFY9xK19Z2Srj1gfr2gQtdV+eWD',
     key_id   => 'amrith@tesora.com',
   }
 
