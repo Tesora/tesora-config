@@ -77,6 +77,12 @@
   ScriptAlias /fakestore /home/gerrit2/review_site/lib/fakestore.cgi
 <% end -%>
 
+  <Location /tesora>
+    Order Deny,Allow
+    Deny from all
+    Allow from 10.240
+  </Location>
+
   <Directory /home/gerrit2/review_site/git/>
     Order allow,deny
     Allow from all
