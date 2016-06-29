@@ -26,7 +26,7 @@ class recheckwatch (
 
   if ! defined(Package['gerritlib']) {
     package { 'gerritlib':
-      ensure   => latest,
+      #ensure   => latest, BH 6/29/16 workaround puppet pip issue PUP-6120
       provider => pip,
       require  => Class['pip'],
     }

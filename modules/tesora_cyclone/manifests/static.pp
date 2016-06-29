@@ -131,7 +131,7 @@ class tesora_cyclone::static (
   }
 
   package { 'keyring':
-    ensure   => 'latest',
+    #ensure   => 'latest',  # BH workaround for PUP6120
     provider => 'pip',
   }
 

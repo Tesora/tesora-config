@@ -12,7 +12,7 @@ class github(
 
   if ! defined(Package['PyGithub']) {
     package { 'PyGithub':
-      ensure   => latest,  # okay to use latest for pip
+      #ensure   => latest,  # BH workaround PUP6120 not fixed in 3.x puppet
       provider => pip,
       require  => Class['pip'],
     }
