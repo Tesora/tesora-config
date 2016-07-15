@@ -44,6 +44,7 @@ class tesora_cyclone::nodepool_prod(
     elements_dir              => $::project_config::nodepool_elements_dir,
     require                   => $::project_config::config_dir,
     git_source_repo           => $git_source_repo,
+    revision                  => '0.3.0',
   }
 
   file { '/etc/nodepool/nodepool.yaml':
