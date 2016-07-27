@@ -109,6 +109,7 @@ class tesora_cyclone::template (
       ensure     => running,
       enable     => true,
       hasrestart => true,
+      require    => Package['rsyslog'],
     }
     $rsyslog_notify = [ Service['rsyslog'] ]
   }
@@ -123,6 +124,7 @@ class tesora_cyclone::template (
     group   => 'root',
     mode    => '0644',
     notify  => $rsyslog_notify,
+    require => Package['rsyslog'],
   }
 
   if ($::osfamily == 'RedHat') {
