@@ -75,6 +75,7 @@ class tesora_cyclone::base(
       User::Virtual::Localuser['amrith'],
       User::Virtual::Localuser['bhunter'],
       User::Virtual::Localuser['doug'],
+      User::Virtual::Localuser['iduodu'],
     )
   }
 

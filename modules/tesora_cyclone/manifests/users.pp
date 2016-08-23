@@ -25,5 +25,10 @@ class tesora_cyclone::users {
     key_id   => 'doug@tesora.com',
   }
 
+  @user::virtual::localuser { 'iduodu':
+    realname => 'Isaac Duodu',
+    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDDyCaywlPHzp2125bGOc2TzTd9QGur6TtxrGg8CEr6g4cgBt5jVJCIvu78xKTac4qW5ej4jEUbg+arz3t2eDee0iLmcnm4J4TYcdMScKcLF9FOsi1X2Jq3EB+uWzYjVrD+w/8846CxhNaHkFe1zNCS4rHxcS+5NSW1wdf4gp1I6VnCE0y4wtc49bppjtJVwtsVNfvuzVSWdK6fsDqDGkfGnD704mq0C2OsAsF0uW/of7M9FP2TjWpuoEuu3ok2H9kkx1TO7gNHTwe6zyBxRNbujl31WWg+abSJBnXhSD7AaHpveK7qfsQ6+XV5IFKBWzYbc/3zTc75qZ4vWIre18Ht',
+    key_id   => 'iduodu@tesora.com',
+  }
 
 }
