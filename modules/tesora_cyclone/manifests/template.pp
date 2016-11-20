@@ -137,6 +137,6 @@ class tesora_cyclone::template (
   class { 'tesora_cyclone::hosts': }
 
   class { 'nrpe':
-    allowed_hosts => ['127.0.0.1', $::ipaddress ,'10.240.65.11'],
+    allowed_hosts => ['127.0.0.1', $::ipaddress ,'10.242.0.212'],
   }
 }
