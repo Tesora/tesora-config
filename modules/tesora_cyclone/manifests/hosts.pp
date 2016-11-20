@@ -4,31 +4,31 @@ class tesora_cyclone::hosts (
 ) {
 
   host { 'review.elasticdb.org':
-    ip => '10.240.64.217',
+    ip => '10.242.0.215',
   }
 
   host { 'zuul.elasticdb.org':
-    ip => '10.240.64.214',
+    ip => '10.242.0.216',
   }
 
   host { 'jenkins01.elasticdb.org':
-    ip => '10.240.65.247',
+    ip => '10.242.0.238',
   }
 
   host { 'nodepool.elasticdb.org':
-    ip => '10.240.64.68',
+    ip => '10.242.0.240',
   }
 
   host { 'ci-backup-01.elasticdb.org':
-    ip => '10.240.66.191',
+    ip => '10.242.0.253',
   }
 
   host { 'static.elasticdb.org':
-    ip => '10.240.64.211',
+    ip => '10.242.0.246',
   }
 
   host { 'ci-puppetmaster.openstacklocal':
-    ip => '10.240.64.210',
+    ip => '10.242.0.208',
   }
 
 }
