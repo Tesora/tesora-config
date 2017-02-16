@@ -7,11 +7,12 @@ class tesora_cyclone::users {
     key_id   => 'andrew@tesora.com',
   }
 
-  @user::virtual::localuser { 'amrith':
-    realname => 'Amrith Kumar',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCxnJUutDKMEbJYuAPe/BA+0P3dvglUAIzKbMWpNcg++/G5iGwqkrXO6IXddCVvu5MTTd6T266XNL7EVIljc6ZE3FS8O4GCPUWqnnFf57+pXCMAmRTEo35ybuMXYfsdxhRArXm3rg4BSGX8QruW5Hai/Rn6yB10/aDsTGD+1DI2uZf3eGltFFIhTLj/sEYTsthNwkz4EXXPz46sBrITxEd3zDExxmI478dQq2FD1/EOo4MLW+1VRK4V5g7uaq3eHWmEEQRhdQQ6/lGd1x4zXXqHJQFRq2dGDazzJJ9cI4T3nWrCrveTM+pmv+uFIDFY9xK19Z2Srj1gfr2gQtdV+eWD',
-    key_id   => 'amrith@tesora.com',
-  }
+#  @user::virtual::localuser { 'amrith':
+#    realname => 'Amrith Kumar',
+#    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCxnJUutDKMEbJYuAPe/BA+0P3dvglUAIzKbMWpNcg++/G5iGwqkrXO6IXddCVvu5MTTd6T266XNL7EVIljc6ZE3FS8O4GCPUWqnnFf57+pXCMAmRTEo35ybuMXYfsdxhRArXm3rg4BSGX8QruW5Hai/Rn6yB10/aDsTGD+1DI2uZf3eGltFFIhTLj/sEYTsthNwkz4EXXPz46sBrITxEd3zDExxmI478dQq2FD1/EOo4MLW+1VRK4V5g7uaq3eHWmEEQRhdQQ6/lGd1x4zXXqHJQFRq2dGDazzJJ9cI4T3nWrCrveTM+pmv+uFIDFY9xK19Z2Srj1gfr2gQtdV+eWD',
+#    key_id   => 'amrith@tesora.com',
+#  }
+  disable { 'amrith': }
 
   @user::virtual::localuser { 'bhunter':
     realname => 'Brian Hunter',
@@ -25,10 +26,11 @@ class tesora_cyclone::users {
     key_id   => 'doug@tesora.com',
   }
 
-  @user::virtual::localuser { 'iduodu':
-    realname => 'Isaac Duodu',
-    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDDyCaywlPHzp2125bGOc2TzTd9QGur6TtxrGg8CEr6g4cgBt5jVJCIvu78xKTac4qW5ej4jEUbg+arz3t2eDee0iLmcnm4J4TYcdMScKcLF9FOsi1X2Jq3EB+uWzYjVrD+w/8846CxhNaHkFe1zNCS4rHxcS+5NSW1wdf4gp1I6VnCE0y4wtc49bppjtJVwtsVNfvuzVSWdK6fsDqDGkfGnD704mq0C2OsAsF0uW/of7M9FP2TjWpuoEuu3ok2H9kkx1TO7gNHTwe6zyBxRNbujl31WWg+abSJBnXhSD7AaHpveK7qfsQ6+XV5IFKBWzYbc/3zTc75qZ4vWIre18Ht',
-    key_id   => 'iduodu@tesora.com',
-  }
+#  @user::virtual::localuser { 'iduodu':
+#    realname => 'Isaac Duodu',
+#    sshkeys  => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQDDyCaywlPHzp2125bGOc2TzTd9QGur6TtxrGg8CEr6g4cgBt5jVJCIvu78xKTac4qW5ej4jEUbg+arz3t2eDee0iLmcnm4J4TYcdMScKcLF9FOsi1X2Jq3EB+uWzYjVrD+w/8846CxhNaHkFe1zNCS4rHxcS+5NSW1wdf4gp1I6VnCE0y4wtc49bppjtJVwtsVNfvuzVSWdK6fsDqDGkfGnD704mq0C2OsAsF0uW/of7M9FP2TjWpuoEuu3ok2H9kkx1TO7gNHTwe6zyBxRNbujl31WWg+abSJBnXhSD7AaHpveK7qfsQ6+XV5IFKBWzYbc/3zTc75qZ4vWIre18Ht',
+#    key_id   => 'iduodu@tesora.com',
+#  }
+  disable { 'iduodu': }
 
 }
