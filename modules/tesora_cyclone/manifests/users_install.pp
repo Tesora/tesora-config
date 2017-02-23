@@ -29,17 +29,13 @@ class tesora_cyclone::users_install (
     }
     realize (
       User::Virtual::Localuser['andrew'],
-      User::Virtual::Localuser['amrith'],
       User::Virtual::Localuser['bhunter'],
       User::Virtual::Localuser['doug'],
-      User::Virtual::Localuser['iduodu'],
     )
   } else {
       user::virtual::disable{'andrew':}
-      user::virtual::disable{'amrith':}
       user::virtual::disable{'bhunter':}
       user::virtual::disable{'doug':}
-      user::virtual::disable{'iduodu':}
   }
 }
 
