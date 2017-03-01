@@ -20,11 +20,11 @@ class tesora_cyclone::hosts (
   }
 
   host { 'ci-backup-01.elasticdb.org':
-    ip => '10.47.232.55',
+    ip => '10.47.232.57',
   }
 
   host { 'static.elasticdb.org':
-    ip => '10.47.232.54',
+    ip => '10.47.232.56',
   }
 
   host { 'ci-puppetmaster.openstacklocal':
